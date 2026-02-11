@@ -1,0 +1,50 @@
+{% extends 'cuestionario/base.html' %}
+{% load static %}
+
+{% block title %}Login - Sistema Mohala{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Acceso al Sistema</h2>
+    <p>Por favor, ingrese sus credenciales para continuar con su evaluación.</p>
+    
+    <div class="row gtr-uniform">
+        <div class="col-6 col-12-xsmall">
+            
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                
+                <div class="row gtr-uniform">
+                    <div class="col-12">
+                        <label for="username">Correo Electrónico</label>
+                        <input type="email" name="username" id="username" value="" placeholder="ejemplo@mohala.cl" required />
+                    </div>
+
+                    <div class="col-12">
+                        <label for="password">Contraseña</label>
+                        <input type="password" name="password" id="password" value="" placeholder="••••••••" required />
+                    </div>
+
+                    {% if error %}
+                    <div class="col-12">
+                        <p style="color: #ff4d4d; font-weight: bold; background: rgba(255,0,0,0.1); padding: 10px; border-radius: 4px;">
+                            ⚠️ {{ error }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    <div class="col-12">
+                        <ul class="actions">
+                            <li><input type="submit" value="Entrar" class="primary" /></li>
+                            <li><input type="reset" value="Limpiar" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'cuestionario/js/validador_login.js' %}"></script>
+{% endblock %}

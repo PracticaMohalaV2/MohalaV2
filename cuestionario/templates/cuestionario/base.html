@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="es">
+    <head>
+        <title>{% block title %}Sistema Mohala{% endblock %}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        
+        <link rel="stylesheet" href="{% static 'cuestionario/css/main.css' %}" />
+        <noscript><link rel="stylesheet" href="{% static 'cuestionario/css/noscript.css' %}" /></noscript>
+        
+        <link rel="stylesheet" href="{% static 'cuestionario/css/mohala.css' %}">
+    </head>
+    <body class="is-preload">
+
+        <section id="sidebar">
+            <div class="inner">
+                <nav>
+                    <ul>
+                        <li><a href="/?id={{ trabajador.id_trabajador|default:1 }}">Inicio</a></li>
+                        <li><a href="#footer">Ayuda / Soporte</a></li>
+                    </ul>
+                </nav>
+
+                {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post" style="margin-top: 2em;">
+                        {% csrf_token %}
+                        <button type="submit" class="button small fit">Cerrar Sesión</button>
+                    </form>
+                {% endif %}
+            </div>
+        </section>
+
+        <div id="wrapper">
+            <section id="main" class="wrapper style1 fullscreen fade-up">
+                <div class="inner">
+                    <header>
+                        <h1 style="border-bottom: solid 2px rgba(255, 255, 255, 0.125); padding-bottom: 0.5em;">
+                            Sistema Mohala
+                        </h1>
+                    </header>
+                    
+                    {% block content %}{% endblock %}
+                </div>
+            </section>
+        </div>
+
+        <footer id="footer" class="wrapper style1-alt">
+            <div class="inner">
+                <ul class="menu">
+                    <li>&copy; 2026 Sistema Mohala.</li>
+                </ul>
+            </div>
+        </footer>
+
+        <script src="{% static 'cuestionario/js/jquery.min.js' %}"></script>
+        <script src="{% static 'cuestionario/js/jquery.scrollex.min.js' %}"></script>
+        <script src="{% static 'cuestionario/js/jquery.scrolly.min.js' %}"></script>
+        <script src="{% static 'cuestionario/js/browser.min.js' %}"></script>
+        <script src="{% static 'cuestionario/js/breakpoints.min.js' %}"></script>
+        <script src="{% static 'cuestionario/js/util.js' %}"></script>
+        <script src="{% static 'cuestionario/js/main.js' %}"></script>
+
+    </body>
+</html>

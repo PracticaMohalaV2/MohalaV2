@@ -1,0 +1,137 @@
+{% extends "cuestionario/base.html" %}
+
+{% block title %}
+    {% if es_admin_sistema %}Inicio - Administración{% else %}Inicio - {{ trabajador.nombre }}{% endif %}
+{% endblock %}
+
+{% block content %}
+    
+    {% if es_admin_sistema %}
+    <section>
+        <header>
+            <h2>Panel de Control - Administrador</h2>
+            <p>Bienvenido, <strong>{{ nombre_usuario }}</strong>.</p>
+        </header>
+        <div class="features">
+            <section>
+                <span class="icon solid major fa-chart-line"></span>
+                <h3>Seguimiento General</h3>
+                <p>Visualiza el estado de las evaluaciones de todos los colaboradores en tiempo real.</p>
+                <ul class="actions">
+                    <li><a href="{% url 'seguimiento_admin' %}" class="button primary">Ver Seguimiento en Tiempo Real</a>
+                </ul>
+            </section>
+            <section>
+                <span class="icon solid major fa-lock"></span>
+                <h3>Gestión de Usuarios</h3>
+                <p>Accede al panel nativo de Django para gestionar cuentas y permisos.</p>
+                <ul class="actions">
+                    <li><a href="/admin/" class="button">Ir al Admin de Django</a></li>
+                </ul>
+            </section>
+        </div>
+    </section>
+
+    {% else %}
+    <section>
+        <header>
+            <h2>Bienvenid@, {{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</h2>
+            <p><strong>{{ trabajador.cargo.nombre_cargo }}</strong> {{ trabajador.departamento.nombre_departmento }}</p>
+        </header>
+    </section>
+
+    <div class="features">
+        <section>
+            <span class="icon solid major fa-user-check"></span>
+            <h3>Mi Autoevaluación</h3>
+            
+            {% if ya_hizo_autoevaluacion %}
+                <p style="color: #51ff85;">✅ <strong>Proceso Completado:</strong> Has finalizado todas tus dimensiones.</p>
+                <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button">Ver estado</a>
+            {% else %}
+                <p>Presiona el botón para seleccionar la dimensión que deseas evaluar (Organizacional o Funcional).</p>
+                <ul class="actions">
+                    <li>
+                        <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button primary">
+                            Comenzar Autoevaluación
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+        </section>
+
+        <section>
+            <span class="icon solid major fa-info-circle"></span>
+            <h3>Información</h3>
+            <p>Este proceso consta de dos partes obligatorias. Los resultados serán revisados por tu jefatura directa.</p>
+        </section>
+    </div>
+
+    {% if es_jefe %}
+    <section id="jefatura" class="wrapper style2 spotlights" style="margin-top: 2em; border-radius: 10px; overflow: hidden;">
+        <section>
+            <div class="content">
+                <div class="inner">
+                    <h2>Panel de Jefatura</h2>
+                    <p>Selecciona a un colaborador para gestionar sus dimensiones de evaluación:</p>
+                    
+                    <div class="table-wrapper">
+                        <table class="alt">
+                            <thead>
+                                <tr>
+                                    <th>Colaborador</th>
+                                    <th>Estado Colaborador</th> <th style="text-align: center;">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for subordinado in equipo %}
+                                <tr>
+                                    <td style="vertical-align: middle;">
+                                        <strong>{{ subordinado.nombre }} {{ subordinado.apellido_paterno }}</strong><br>
+                                        <span style="font-size: 0.8em; opacity: 0.7;">{{ subordinado.cargo.nombre_cargo }}</span>
+                                    </td>
+                                    
+                                    <td style="vertical-align: middle;">
+                                        {% if subordinado.autoevaluacion_terminada %}
+                                            <span style="color: #51ff85; font-size: 0.9em;">✅ Autoevaluación lista</span>
+                                        {% else %}
+                                            <span style="color: #ffc107; font-size: 0.9em;">⏳ Pendiente de autoevaluación</span>
+                                        {% endif %}
+                                    </td>
+
+                                    <td style="text-align: center;">
+                                        {% if subordinado.autoevaluacion_terminada %}
+                                            {% if subordinado.ya_evaluado %}
+                                                <a href="{% url 'evaluacion_jefe_inicio' trabajador.id_trabajador subordinado.id_trabajador %}" class="button small">
+                                                    ✅ Finalizado (Ver)
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'evaluacion_jefe_inicio' trabajador.id_trabajador subordinado.id_trabajador %}" class="button primary small">
+                                                    Evaluar Colaborador →
+                                                </a>
+                                            {% endif %}
+                                        {% else %}
+                                            <button class="button small" disabled 
+                                                    style="opacity: 0.4; cursor: not-allowed;" 
+                                                    title="El colaborador debe finalizar su autoevaluación para que puedas evaluarlo.">
+                                                Bloqueado
+                                            </button>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="3" style="text-align: center;">No hay subordinados asignados.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+    {% endif %}
+    {% endif %}
+
+{% endblock %}

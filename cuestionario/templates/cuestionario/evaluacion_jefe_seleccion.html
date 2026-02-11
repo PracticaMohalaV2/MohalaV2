@@ -1,0 +1,65 @@
+{% extends "cuestionario/base.html" %}
+
+{% block title %}Selección de Dimensión - {{ evaluado.nombre }}{% endblock %}
+
+{% block content %}
+<section>
+    <header>
+        <a href="{% url 'index' %}?id={{ evaluador.id_trabajador }}" class="button small">← Volver al Panel</a>
+        <h2 style="margin-top: 1em;">Dimensiones de Evaluación</h2>
+        <p>Evaluando a: <strong style="color: #51ff85;">{{ evaluado.nombre }} {{ evaluado.apellido_paterno }} {{ evaluado.apellido_materno }}</strong><br>
+        Cargo: {{ evaluado.cargo.nombre_cargo }}</p>
+    </header>
+
+    <div class="features">
+        <section style="border: 1px solid rgba(255,255,255,0.1); padding: 2em; border-radius: 8px; background: rgba(255,255,255,0.02); text-align: center;">
+            <h3 style="color: #51ff85;">1. Organizacionales</h3>
+            <p>Competencias transversales alineadas a la cultura y valores de la compañía.</p>
+            
+            {% if hecho_org %}
+                <p style="color: #51ff85; font-weight: bold; margin-bottom: 1em;">✅ Sección Completada</p>
+                <a href="{% url 'ver_resultados' evaluado.id_trabajador 'jefe' %}?evaluador_id={{ evaluador.id_trabajador }}&dimension=Organizacional" class="button fit">Ver Calificaciones</a>
+            {% else %}
+                <a href="{% url 'evaluacion_jefe' evaluador.id_trabajador evaluado.id_trabajador 'Organizacional' %}" class="button primary fit">Evaluar Organizacionales</a>
+            {% endif %}
+        </section>
+
+        <section style="border: 1px solid rgba(255,255,255,0.1); padding: 2em; border-radius: 8px; background: rgba(255,255,255,0.02); text-align: center;">
+            <h3 style="color: #2196F3;">2. Funcionales</h3>
+            <p>Competencias específicas relacionadas con los conocimientos técnicos del cargo.</p>
+            
+            {% if hecho_fun %}
+                <p style="color: #2196F3; font-weight: bold; margin-bottom: 1em;">✅ Sección Completada</p>
+                <a href="{% url 'ver_resultados' evaluado.id_trabajador 'jefe' %}?evaluador_id={{ evaluador.id_trabajador }}&dimension=Funcional" class="button fit">Ver Calificaciones</a>
+            {% else %}
+                <a href="{% url 'evaluacion_jefe' evaluador.id_trabajador evaluado.id_trabajador 'Funcional' %}" class="button primary fit">Evaluar Funcionales</a>
+            {% endif %}
+        </section>
+    </div>
+
+    <hr />
+
+    {% if ya_finalizado %}
+        <div style="text-align: center; margin-top: 2em; padding: 2em; background: rgba(81, 255, 133, 0.1); border-radius: 10px; border: 1px solid #51ff85;">
+            <h3 style="color: #51ff85; margin: 0;">🎉 ¡Evaluación de Jefatura Enviada!</h3>
+            <p>Has confirmado la evaluación para <strong>{{ evaluado.nombre }} {{ evaluado.apellido_paterno }} {{ evaluado.apellido_materno }}</strong>. Los resultados ya no pueden ser modificados.</p>
+        </div>
+    {% elif listo_para_enviar %}
+        <div style="text-align: center; margin-top: 2em; padding: 2em; background: rgba(255, 193, 7, 0.1); border-radius: 10px; border: 1px solid #ffc107;">
+            <h3 style="color: #ffc107;">⚠️ Paso Final: Confirmar Envío</h3>
+            <p>Has completado todas las dimensiones. Haz clic abajo para <strong>cerrar definitivamente</strong> la evaluación de este colaborador.</p>
+            
+            <form method="POST" action="{% url 'finalizar_evaluacion_jefe' evaluador.id_trabajador evaluado.id_trabajador %}">
+                {% csrf_token %}
+                <button type="submit" class="button primary large fit" style="background-color: #e91e63 !important;">
+                    Confirmar y Cerrar Evaluación
+                </button>
+            </form>
+        </div>
+    {% else %}
+        <div style="text-align: center; margin-top: 2em; padding: 1em; opacity: 0.6;">
+            <p>Debes completar ambas dimensiones antes de realizar el cierre definitivo.</p>
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

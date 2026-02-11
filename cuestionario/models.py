@@ -4,6 +4,20 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver 
 
 # =========================
+# Tabla Escala
+# =========================
+class Escala(models.Model):
+    id_escala = models.IntegerField(primary_key=True)
+    descripcion = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'ESCALA'
+
+    def __str__(self):
+        return f"{self.id_escala} - {self.descripcion}"
+
+# =========================
 # Tabla Dimension
 # =========================
 class Dimension(models.Model):
@@ -99,7 +113,6 @@ class Trabajador(models.Model):
         db_column='departamento_id_departamento'
     )
 
-    # Vínculo con el usuario de sistema para el Login
     user = models.OneToOneField(
         User, 
         on_delete=models.SET_NULL, 
@@ -117,7 +130,7 @@ class Trabajador(models.Model):
         return self.subordinados.exists()
 
     def __str__(self):
-        return f"{self.nombre} {self.apellido_paterno} {self.apellido_materno} | {self.rut} | {self.email}"
+        return f"{self.nombre} {self.apellido_paterno} | {self.rut}"
 
 # =========================
 # Tabla Competencia
@@ -168,9 +181,14 @@ class TextosEvaluacion(models.Model):
 # =========================
 class Autoevaluacion(models.Model):
     id_autoevaluacion = models.AutoField(primary_key=True)
-    puntaje = models.DecimalField(max_digits=5, decimal_places=2)
+    puntaje = models.IntegerField()  
+    escala = models.ForeignKey(
+        'Escala', 
+        on_delete=models.DO_NOTHING, 
+        db_column='escala_id_escala'
+    )
     fecha_evaluacion = models.DateField()
-    momento_evaluacion = models.DateTimeField()
+    momento_evaluacion = models.DateTimeField(auto_now_add=True)
     estado_finalizacion = models.BooleanField(default=False)
     comentario = models.TextField(null=True, blank=True)
     trabajador = models.ForeignKey(
@@ -195,15 +213,17 @@ class Autoevaluacion(models.Model):
         db_table = 'AUTOEVALUACION'
         unique_together = (('trabajador', 'codigo_excel'),)
 
-    def __str__(self):
-        return f"{self.codigo_excel.codigo_excel} | {self.puntaje} | {self.trabajador.nombre} {self.trabajador.apellido_paterno} | {self.trabajador.rut}"
-
 # =========================
 # Tabla Evaluacion Jefatura
 # =========================
 class EvaluacionJefatura(models.Model):
     id_evaluacion_jefatura = models.AutoField(primary_key=True)
-    puntaje = models.DecimalField(max_digits=5, decimal_places=2)
+    puntaje = models.IntegerField() 
+    escala = models.ForeignKey(
+        'Escala', 
+        on_delete=models.DO_NOTHING, 
+        db_column='escala_id_escala'
+    )
     evaluador = models.ForeignKey(
         'Trabajador', 
         on_delete=models.DO_NOTHING, 
@@ -211,7 +231,7 @@ class EvaluacionJefatura(models.Model):
         related_name='jefe_evaluador'
     )
     fecha_evaluacion = models.DateField()
-    momento_evaluacion = models.DateTimeField()
+    momento_evaluacion = models.DateTimeField(auto_now_add=True)
     estado_finalizacion = models.BooleanField(default=False)
     comentario = models.TextField(null=True, blank=True)
     trabajador_evaluado = models.ForeignKey(
@@ -236,18 +256,15 @@ class EvaluacionJefatura(models.Model):
         managed = False
         db_table = 'EVALUACION_JEFATURA'
         unique_together = (('evaluador', 'trabajador_evaluado', 'codigo_excel'),)
-    
-    def __str__(self):
-        return f"{self.codigo_excel.codigo_excel} | {self.puntaje} | Jefe: {self.evaluador.nombre} {self.evaluador.apellido_paterno} -> Trabajador Evaluado: {self.trabajador_evaluado.nombre} {self.trabajador_evaluado.apellido_paterno}"
-    
+
 # =========================
 # Tabla Resultado Consolidado
 # =========================
 class ResultadoConsolidado(models.Model):
     id_resultado = models.AutoField(primary_key=True)
-    puntaje_autoev = models.DecimalField(max_digits=5, decimal_places=2)
-    puntaje_jefe = models.DecimalField(max_digits=5, decimal_places=2)
-    diferencia = models.DecimalField(max_digits=5, decimal_places=2)
+    puntaje_autoev = models.IntegerField() 
+    puntaje_jefe = models.IntegerField()   
+    diferencia = models.IntegerField()    
 
     trabajador = models.ForeignKey(
         'Trabajador', 
@@ -284,25 +301,16 @@ class ResultadoConsolidado(models.Model):
         db_table = 'RESULTADO_CONSOLIDADO'
         unique_together = (('trabajador', 'codigo_excel', 'periodo'),)
 
-    def __str__(self):
-        return f"Consolidado {self.periodo} | {self.trabajador.nombre} {self.trabajador.apellido_paterno} | Dif: {self.diferencia}"
-
 # ==========================================================
 # SIGNALS: Automatización de creación de usuarios para Login
 # ==========================================================
 @receiver(post_save, sender=Trabajador)
 def crear_usuario_automatico(sender, instance, created, **kwargs):
-    """
-    Cada vez que se crea un Trabajador, se le crea un User de Django
-    con username = email y password = Mohala2026.
-    """
     if created and not instance.user:
-        # Creamos el objeto User en auth_user
         nuevo_user = User.objects.create_user(
             username=instance.email,
             email=instance.email,
             password='Mohala2026'
         )
-        # Vinculamos y guardamos el campo user_id en TRABAJADOR
         instance.user = nuevo_user
         instance.save()

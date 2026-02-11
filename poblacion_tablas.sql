@@ -1,4 +1,13 @@
 -- =========================
+-- Poblamiento de tabla Escala
+-- =========================
+INSERT INTO ESCALA (ID_ESCALA, DESCRIPCION) VALUES 
+(1, 'NO LOGRA LO ESPERADO'),
+(2, 'LOGRA PARCIALMENTE LO ESPERADO'),
+(3, 'LOGRA LO ESPERADO'),
+(4, 'SUPERA LO ESPERADO');
+
+-- =========================
 -- Poblamiento de tabla Dimension
 -- =========================
 INSERT INTO DIMENSION (id_dimension, nombre_dimension)

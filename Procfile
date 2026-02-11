@@ -1,1 +1,1 @@
-web: python manage.py migrate && python manage.py collectstatic --noinput && gunicorn Sistema_Mohala.wsgi --bind 0.0.0.0:$PORT
+web: gunicorn Sistema_Mohala.wsgi --bind 0.0.0.0:$PORT --timeout 90

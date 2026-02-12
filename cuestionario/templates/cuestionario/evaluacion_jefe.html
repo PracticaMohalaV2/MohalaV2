@@ -11,6 +11,16 @@
         </h3>
         <p>Evaluador: <strong>{{ evaluador.nombre }} {{ evaluador.apellido_paterno }}</strong><br>
         Colaborador a evaluar: <strong style="color: #51ff85;">{{ evaluado.nombre }} {{ evaluado.apellido_paterno }}</strong></p>
+
+        <div style="background: rgba(255,255,255,0.05); padding: 1em; border-radius: 8px; margin-bottom: 2em; border: 1px solid rgba(255,255,255,0.1);">
+            <p style="margin-bottom: 0.5em; font-weight: bold; font-size: 0.9em;">Escala de calificación:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; font-size: 0.85em;">
+                <span><strong>1:</strong> No cumple</span>
+                <span><strong>2:</strong> En desarrollo</span>
+                <span><strong>3:</strong> Cumple</span>
+                <span><strong>4:</strong> Sobresaliente</span>
+            </div>
+        </div>
     </header>
 
     <form method="POST" onsubmit="this.btnSubmit.disabled=true; this.btnSubmit.innerText='Guardando...'; return true;">
@@ -38,14 +48,19 @@
                         <td style="vertical-align: middle;">
                             <div style="display: flex; justify-content: space-around; align-items: center;">
                                 {% for i in "1234" %}
-                                <label style="margin-bottom: 0; cursor: pointer; text-align: center;">
+                                <div style="text-align: center;">
                                     <input type="radio" 
+                                           id="j_{{ p.id_textos_evaluacion }}_{{ i }}" 
                                            name="puntaje_{{ p.id_textos_evaluacion }}" 
                                            value="{{ i }}" 
                                            required
-                                           style="display: inline-block; width: auto; margin-bottom: 5px;">
-                                    <span style="display: block; font-size: 0.9em;">{{ i }}</span>
-                                </label>
+                                           style="display: block; margin: 0 auto 5px auto; width: auto;">
+                                    
+                                    <label for="j_{{ p.id_textos_evaluacion }}_{{ i }}" 
+                                           style="margin-bottom: 0; cursor: pointer; padding: 5px; display: block;">
+                                        <span style="font-size: 0.9em; font-weight: bold;">{{ i }}</span>
+                                    </label>
+                                </div>
                                 {% endfor %}
                             </div>
                         </td>

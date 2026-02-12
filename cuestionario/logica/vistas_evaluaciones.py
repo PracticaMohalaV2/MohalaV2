@@ -41,14 +41,13 @@ def cuestionario_autoevaluacion(request, trabajador_id, dimension=None):
     preguntas_qs = TextosEvaluacion.objects.filter(
         nivel_jerarquico=trabajador.nivel_jerarquico,
         competencia__dimension__nombre_dimension__icontains=dimension
-    ).select_related('competencia__dimension').order_by('competencia__id_competencia')
+    ).select_related('competencia__dimension').order_by('id_textos_evaluacion')
 
     if request.method == 'POST':
         with transaction.atomic():
             for pregunta in preguntas_qs:
                 puntaje_valor = request.POST.get(f'puntaje_{pregunta.id_textos_evaluacion}')
                 if puntaje_valor:
-                    # Obtenemos el objeto escala para la FK
                     obj_escala = Escala.objects.get(id_escala=int(puntaje_valor))
                     
                     Autoevaluacion.objects.update_or_create(
@@ -127,14 +126,13 @@ def cuestionario_jefatura(request, evaluador_id, evaluado_id, dimension=None):
     preguntas_qs = TextosEvaluacion.objects.filter(
         nivel_jerarquico=evaluado.nivel_jerarquico,
         competencia__dimension__nombre_dimension__icontains=dimension
-    ).select_related('competencia__dimension').order_by('competencia__id_competencia')
+    ).select_related('competencia__dimension').order_by('id_textos_evaluacion')
 
     if request.method == 'POST':
         with transaction.atomic():
             for pregunta in preguntas_qs:
                 puntaje_valor = request.POST.get(f'puntaje_{pregunta.id_textos_evaluacion}')
                 if puntaje_valor:
-                    # Obtenemos el objeto escala para la FK
                     obj_escala = Escala.objects.get(id_escala=int(puntaje_valor))
                     
                     EvaluacionJefatura.objects.update_or_create(
@@ -163,7 +161,6 @@ def finalizar_evaluacion_jefe(request, evaluador_id, evaluado_id):
             trabajador_evaluado_id=evaluado_id
         ).update(estado_finalizacion=True)
         
-        # Generamos el consolidado al terminar el jefe
         evaluado_obj = Trabajador.objects.get(id_trabajador=evaluado_id)
         generar_consolidado(evaluado_obj)
         

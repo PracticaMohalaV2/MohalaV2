@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import (
     Dimension, Departamento, NivelJerarquico, Cargo, Trabajador, 
     Competencia, TextosEvaluacion, Autoevaluacion, 
-    EvaluacionJefatura, ResultadoConsolidado, Escala  # <--- Añadido Escala
+    EvaluacionJefatura, ResultadoConsolidado, Escala
 )
 
 # --- Configuración Estética ---
@@ -64,7 +64,7 @@ class TextosEvaluacionAdmin(admin.ModelAdmin):
 
 @admin.register(Autoevaluacion)
 class AutoevaluacionAdmin(admin.ModelAdmin):
-    list_display = ('trabajador', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'puntaje', 'escala', 'estado_finalizacion', 'fecha_evaluacion')
+    list_display = ('trabajador', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'escala', 'estado_finalizacion', 'fecha_evaluacion')
     list_filter = ('estado_finalizacion', 'fecha_evaluacion', 'nivel_jerarquico', 'escala')
     search_fields = ('trabajador__nombre', 'trabajador__apellido_paterno', 'codigo_excel__codigo_excel')
     ordering = ('codigo_excel__id_textos_evaluacion',)
@@ -79,7 +79,7 @@ class AutoevaluacionAdmin(admin.ModelAdmin):
     
 @admin.register(EvaluacionJefatura)
 class EvaluacionJefaturaAdmin(admin.ModelAdmin):
-    list_display = ('evaluador', 'trabajador_evaluado', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'puntaje', 'escala', 'estado_finalizacion')
+    list_display = ('evaluador', 'trabajador_evaluado', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'escala', 'estado_finalizacion')
     list_filter = ('estado_finalizacion', 'evaluador', 'trabajador_evaluado', 'escala')
     search_fields = ('trabajador__nombre', 'trabajador__apellido_paterno', 'codigo_excel__codigo_excel')
     ordering = ('codigo_excel__id_textos_evaluacion',)

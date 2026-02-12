@@ -94,7 +94,7 @@ class EvaluacionJefaturaAdmin(admin.ModelAdmin):
 
 @admin.register(ResultadoConsolidado)
 class ResultadoConsolidadoAdmin(admin.ModelAdmin):
-    list_display = ('trabajador', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'puntaje_autoev', 'puntaje_jefe', 'diferencia', 'periodo')
+    list_display = ('trabajador', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'get_escala_jefe', 'get_escala_autoev', 'diferencia', 'periodo')
     list_filter = ('periodo', 'trabajador')
     readonly_fields = ('diferencia',)
     ordering = ('codigo_excel__id_textos_evaluacion',)
@@ -106,6 +106,14 @@ class ResultadoConsolidadoAdmin(admin.ModelAdmin):
     @admin.display(description='Competencia')
     def get_competencia(self, obj):
         return obj.codigo_excel.competencia if obj.codigo_excel else "-"
+
+    @admin.display(description='Autoevaluación', ordering='puntaje_autoev')
+    def get_autoev_display(self, obj):
+        return obj.get_puntaje_autoev_display()
+
+    @admin.display(description='Evaluación Jefe', ordering='puntaje_jefe')
+    def get_jefe_display(self, obj):
+        return obj.get_puntaje_jefe_display()
 
 # Registros simples
 admin.site.register(Dimension)

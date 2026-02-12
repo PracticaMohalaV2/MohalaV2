@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from cuestionario.models import Trabajador, TextosEvaluacion, Autoevaluacion, EvaluacionJefatura
+from cuestionario.models import Trabajador, TextosEvaluacion, Autoevaluacion, EvaluacionJefatura, Escala
 from django.db import transaction
 from .calculos import generar_consolidado 
 
@@ -48,11 +48,15 @@ def cuestionario_autoevaluacion(request, trabajador_id, dimension=None):
             for pregunta in preguntas_qs:
                 puntaje_valor = request.POST.get(f'puntaje_{pregunta.id_textos_evaluacion}')
                 if puntaje_valor:
+                    # Obtenemos el objeto escala para la FK
+                    obj_escala = Escala.objects.get(id_escala=int(puntaje_valor))
+                    
                     Autoevaluacion.objects.update_or_create(
                         trabajador=trabajador,
                         codigo_excel=pregunta,
                         defaults={
                             'puntaje': puntaje_valor,
+                            'escala': obj_escala,
                             'fecha_evaluacion': timezone.now().date(),
                             'momento_evaluacion': timezone.now(),
                             'comentario': request.POST.get('comentario', ''),
@@ -79,7 +83,6 @@ def finalizar_autoevaluacion(request, trabajador_id):
 # LÓGICA EVALUACIÓN JEFATURA
 # =========================
 def cuestionario_jefatura(request, evaluador_id, evaluado_id, dimension=None):
-    # ... (Tu código se mantiene igual)
     evaluador = get_object_or_404(Trabajador, id_trabajador=evaluador_id)
     evaluado = get_object_or_404(Trabajador, id_trabajador=evaluado_id)
     
@@ -131,12 +134,16 @@ def cuestionario_jefatura(request, evaluador_id, evaluado_id, dimension=None):
             for pregunta in preguntas_qs:
                 puntaje_valor = request.POST.get(f'puntaje_{pregunta.id_textos_evaluacion}')
                 if puntaje_valor:
+                    # Obtenemos el objeto escala para la FK
+                    obj_escala = Escala.objects.get(id_escala=int(puntaje_valor))
+                    
                     EvaluacionJefatura.objects.update_or_create(
                         evaluador=evaluador,
                         trabajador_evaluado=evaluado,
                         codigo_excel=pregunta,
                         defaults={
                             'puntaje': puntaje_valor,
+                            'escala': obj_escala,
                             'fecha_evaluacion': timezone.now().date(),
                             'momento_evaluacion': timezone.now(),
                             'comentario': request.POST.get('comentario', ''),
@@ -157,7 +164,7 @@ def finalizar_evaluacion_jefe(request, evaluador_id, evaluado_id):
         ).update(estado_finalizacion=True)
         
         # Generamos el consolidado al terminar el jefe
-        evaluado = Trabajador.objects.get(id_trabajador=evaluado_id)
-        generar_consolidado(evaluado)
+        evaluado_obj = Trabajador.objects.get(id_trabajador=evaluado_id)
+        generar_consolidado(evaluado_obj)
         
     return redirect('evaluacion_jefe_inicio', evaluador_id=evaluador_id, evaluado_id=evaluado_id)

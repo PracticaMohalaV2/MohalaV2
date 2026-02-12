@@ -107,13 +107,13 @@ class ResultadoConsolidadoAdmin(admin.ModelAdmin):
     def get_competencia(self, obj):
         return obj.codigo_excel.competencia if obj.codigo_excel else "-"
 
-    @admin.display(description='Autoevaluación', ordering='puntaje_autoev')
-    def get_autoev_display(self, obj):
-        return obj.get_puntaje_autoev_display()
+    @admin.display(description='Autoevaluación', ordering='id_escala_autoev')
+    def get_escala_autoev(self, obj):
+        return obj.id_escala_autoev.nombre_escala if obj.id_escala_autoev else "-"
 
-    @admin.display(description='Evaluación Jefe', ordering='puntaje_jefe')
-    def get_jefe_display(self, obj):
-        return obj.get_puntaje_jefe_display()
+    @admin.display(description='Evaluación Jefe', ordering='id_escala_jefe')
+    def get_escala_jefe(self, obj):
+        return obj.id_escala_jefe.nombre_escala if obj.id_escala_jefe else "-"
 
 # Registros simples
 admin.site.register(Dimension)

@@ -1,7 +1,9 @@
 -- =========================
 -- Poblamiento de tabla Escala
 -- =========================
-INSERT INTO ESCALA (ID_ESCALA, DESCRIPCION) VALUES 
+INSERT INTO ESCALA 
+    (ID_ESCALA, DESCRIPCION) 
+VALUES 
 (1, 'NO LOGRA LO ESPERADO'),
 (2, 'LOGRA PARCIALMENTE LO ESPERADO'),
 (3, 'LOGRA LO ESPERADO'),
@@ -49,7 +51,7 @@ VALUES
 
 -- Cargos Operativos (Nivel 1)
 INSERT INTO CARGO 
-    (id_cargo, nombre_cargo, nivel_jerarquico_id_nivel_jerarquico) 
+    (ID_CARGO, NOMBRE_CARGO, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES
     (1, 'Analista', 1),
     (2, 'Técnico en Informática', 1),
@@ -69,7 +71,7 @@ VALUES
 
 -- Cargos Tácticos (Nivel 2)
 INSERT INTO CARGO 
-    (id_cargo, nombre_cargo, nivel_jerarquico_id_nivel_jerarquico) 
+    (ID_CARGO, NOMBRE_CARGO, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES
     (16, 'Supervisor de Ventas', 2),
     (17, 'Jefe de Área', 2),
@@ -89,7 +91,7 @@ VALUES
 
 -- Cargos Estratégicos (Nivel 3)
 INSERT INTO CARGO 
-    (id_cargo, nombre_cargo, nivel_jerarquico_id_nivel_jerarquico) 
+    (ID_CARGO, NOMBRE_CARGO, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES
     (31, 'Gerente General', 3),
     (32, 'Director de Operaciones', 3),
@@ -113,7 +115,7 @@ VALUES
 
 -- Competencias Organizacionales (Dimension 1)
 INSERT INTO COMPETENCIA 
-    (id_competencia, nombre_competencia, dimension_id_dimension) 
+    (ID_COMPETENCIA, NOMBRE_COMPETENCIA, DIMENSION_ID_DIMENSION)    
 VALUES
     (1, 'Creatividad e Innovación', 1),
     (2, 'Enfoque de Negocio', 1),
@@ -123,7 +125,7 @@ VALUES
 
 -- Competencias Funcionales (Dimension 2)
 INSERT INTO COMPETENCIA 
-    (id_competencia, nombre_competencia, dimension_id_dimension) 
+    (ID_COMPETENCIA, NOMBRE_COMPETENCIA, DIMENSION_ID_DIMENSION) 
 VALUES
     (6, 'Análisis y Solución de Problemas', 2),
     (7, 'Aprendizaje e Innovación', 2),
@@ -142,14 +144,14 @@ VALUES
 
 -- NIVEL 1: GERENCIA GENERAL
 INSERT INTO TRABAJADOR 
-    (id_trabajador, rut, id_jefe_directo, nombre, apellido_paterno, apellido_materno, email, genero, nivel_jerarquico_id_nivel_jerarquico, cargo_id_cargo, departamento_id_departamento)
+    (ID_TRABAJADOR, RUT, ID_JEFE_DIRECTO, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMAIL, GENERO, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO, CARGO_ID_CARGO, DEPARTAMENTO_ID_DEPARTAMENTO)
 VALUES 
     (1, '10.234.567-1', NULL, 'Roberto', 'Méndez', 'Castro', 'r.mendez@mohala.cl', 'Masculino', 3, 31, 1),
     (2, '12.456.789-2', NULL, 'Patricia', 'Lorca', 'Vial', 'p.lorca@mohala.cl', 'Femenino', 3, 20, 2);
 
 -- NIVEL 2: JEFATURAS (Reportan al ID 1)
 INSERT INTO TRABAJADOR 
-    (id_trabajador, rut, id_jefe_directo, nombre, apellido_paterno, apellido_materno, email, genero, nivel_jerarquico_id_nivel_jerarquico, cargo_id_cargo, departamento_id_departamento)
+    (ID_TRABAJADOR, RUT, ID_JEFE_DIRECTO, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMAIL, GENERO, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO, CARGO_ID_CARGO, DEPARTAMENTO_ID_DEPARTAMENTO)
 VALUES 
     (3, '11.345.678-3', 1, 'Andrés', 'Tapia', 'Ruiz', 'a.tapia@mohala.cl', 'Masculino', 2, 29, 3),
     (4, '13.567.890-4', 1, 'Mónica', 'Sánchez', 'Paz', 'm.sanchez@mohala.cl', 'Femenino', 2, 22, 5);
@@ -158,7 +160,7 @@ VALUES
 
 -- Reportan a RRHH (Jefe ID: 2)
 INSERT INTO TRABAJADOR 
-    (id_trabajador, rut, id_jefe_directo, nombre, apellido_paterno, apellido_materno, email, genero, nivel_jerarquico_id_nivel_jerarquico, cargo_id_cargo, departamento_id_departamento)
+    (ID_TRABAJADOR, RUT, ID_JEFE_DIRECTO, NOMBRE, APELLIDO_PATERNO, APELLIDO_MATERNO, EMAIL, GENERO, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO, CARGO_ID_CARGO, DEPARTAMENTO_ID_DEPARTAMENTO)
 VALUES 
     (5, '18.456.789-9', 2, 'Valeria', 'Cáceres', 'Pinto', 'v.caceres@mohala.cl', 'Femenino', 1, 8, 2),
     (6, '19.567.890-0', 2, 'Sebastián', 'Marín', 'Rojas', 's.marin@mohala.cl', 'Masculino', 1, 10, 2);
@@ -171,7 +173,7 @@ VALUES
 -- 1. CREATIVIDAD E INNOVACIÓN (ID_COMPETENCIA: 1)
 -- Operativo (Nivel 1), Táctico (Nivel 2), Estratégico (Nivel 3)
 INSERT INTO TEXTOS_EVALUACION 
-    (id_textos_evaluacion, codigo_excel, texto, DIMENSION_ID_DIMENSION, competencia_id_competencia, nivel_jerarquico_id_nivel_jerarquico)
+    (ID_TEXTOS_EVALUACION, CODIGO_EXCEL, TEXTO, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
     (1, 'CIO1.1', 'Trabaja con mecanismos conocidos y rutinarios.', 1, 1, 1),
     (2, 'CIO1.2', 'Se mueve con facilidad en situaciones conocidas con pautas de acción prefijadas.', 1, 1, 1),
@@ -185,7 +187,7 @@ VALUES
 
 -- 2. ENFOQUE DE NEGOCIO (ID_COMPETENCIA: 2)
 INSERT INTO TEXTOS_EVALUACION 
-    (id_textos_evaluacion, codigo_excel, texto, DIMENSION_ID_DIMENSION, competencia_id_competencia, nivel_jerarquico_id_nivel_jerarquico) 
+    (ID_TEXTOS_EVALUACION, CODIGO_EXCEL, TEXTO, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
     (10, 'ENO2.1', 'Comprende las peculiaridades de los servicios.', 1, 2, 1),
     (11, 'ENO2.2', 'Conoce las estrategias, principios y valores corporativos.', 1, 2, 1),
@@ -195,21 +197,21 @@ VALUES
     (15, 'ENT2.3', 'Promueve en todas las áreas de trabajo, la capacidad para comprender las peculiaridades de los servicios.', 1, 2, 2),
     (16, 'ENE2.1', 'Desarrolla dentro y fuera de la organización la capacidad de adecuar productos, servicios y procedimientos organizacionales, a fin de amoldarse a nuevos contextos de acuerdo con la estrategia del negocio.', 1, 2, 3),
     (17, 'ENE2.2', 'Es un referente dentro y fuera de la organización por su capacidad de identificar y desarrollar oportunidades de negocio.', 1, 2, 3),
-    (18, 'ENE2.3', 'Reconocido por su expertise, alto conocimiento cultural y estrategias.', 1, 2, 3);
+    (18, 'ENE2.3', 'Es reconocido por su expertise, su alto conocimiento  cultural y estrategias de relacionamiento.', 1, 2, 3);
 
 -- 6. ANÁLISIS Y SOLUCIÓN DE PROBLEMAS (ID_COMPETENCIA: 6) 
 INSERT INTO TEXTOS_EVALUACION  
-    (id_textos_evaluacion, codigo_excel, texto, DIMENSION_ID_DIMENSION, competencia_id_competencia, nivel_jerarquico_id_nivel_jerarquico) 
+    (ID_TEXTOS_EVALUACION, CODIGO_EXCEL, TEXTO, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
     (19, 'ASO1.1', 'Resuelve problemas rutinarios de forma efectiva.', 2, 6, 1),
-    (20, 'ASO1.2', 'Acude a sus superiores o pares para crear alternativas.', 6, 1),
+    (20, 'ASO1.2', 'Acude a sus superiores o pares para crear alternativas que le permitan resolver los problemas con mayor grado de dificultad.', 6, 1),
     (21, 'ASO1.3', 'Logra detectar las variables que influyen en el problema de forma oportuna.', 2, 6, 1),
-    (22, 'AST1.1', 'Utiliza eficazmente datos históricos y actuales para prever tendencias.', 2, 6, 2),
-    (23, 'AST1.2', 'Analiza las relaciones entre las distintas partes y causales de un problema.', 2, 6, 2),
-    (24, 'AST1.3', 'Aporta soluciones validas para la situación en tiempo y forma.', 2, 6, 2),
-    (25, 'ASE1.1', 'Realiza análisis complejos utilizando hipótesis y diferentes escenarios.', 2, 6, 3),
-    (26, 'ASE1.2', 'Comprende problemas complejos y los define en torno a principios estratégicos.', 2, 6, 3),
-    (27, 'ASE1.3', 'Se anticipa a las situaciones, previendo respuestas adecuadas y rentables.', 2, 6, 3);
+    (22, 'AST1.1', 'Utiliza eficazmente datos históricos y actuales como ayuda para prever tendencias futuras, siendo efectivo en crear contingencias para que no afecten los resultados.', 2, 6, 2),
+    (23, 'AST1.2', 'Analiza las relaciones entre las distintas partes y causales de un problema, anticipándose a los obstáculos y creando alternativas.', 2, 6, 2),
+    (24, 'AST1.3', 'Aporta soluciones validas para la situación en tiempo y forma, responsabilizándose de ellas.', 2, 6, 2),
+    (25, 'ASE1.1', 'Realiza análisis complejos utilizando hipótesis y diferentes escenarios, logrando rescatar los aspectos más significativos.', 2, 6, 3),
+    (26, 'ASE1.2', 'Comprende problemas complejos y los define en torno a principios y estrategias organizacionales.', 2, 6, 3),
+    (27, 'ASE1.3', 'Se anticipa a las situaciones, previendo y planteando respuestas adecuadas y rentables antes que se presente la situación. ', 2, 6, 3);
 
 -- ==========================================================
 -- Poblamiento DESCRIPCION_RESPUESTA
@@ -370,3 +372,12 @@ VALUES
     (62, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENE2.1', 2, 1, 2, 3),
     (63, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENE2.1', 3, 1, 2, 3),
     (64, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENE2.1', 4, 1, 2, 3);
+
+-- ENE2.2
+INSERT INTO DESCRIPCION_RESPUESTA 
+    (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
+VALUES 
+    (61, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENE2.2', 1, 1, 2, 3),
+    (62, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENE2.2', 2, 1, 2, 3),
+    (63, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENE2.2', 3, 1, 2, 3),
+    (64, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENE2.2', 4, 1, 2, 3);

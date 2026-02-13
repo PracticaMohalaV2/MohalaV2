@@ -181,7 +181,7 @@ VALUES
     (4, 'CIT1.1', 'Promueve un estilo de gestión innovador y de vinculación con su entorno, brindando a su equipo herramientas para que trabajen con el mismo enfoque.', 1, 1, 2),
     (5, 'CIT1.2', 'Estructura equipos de alto rendimiento, que suelen tener formatos atípicos utilizando las formas más adecuadas para la consecución de sus objetivos.', 1, 1, 2),
     (6, 'CIT1.3', 'Lidera la implementación de nuevas ideas y soluciones dentro del negocio, es requerido por su aporte de creatividad y visión innovadora, que le permiten resolver situaciones complejas que otros no han podido solucionar.', 1, 1, 2),
-    (7, 'CIE1.1', 'Es consultado por pares y subordinados porque se le reconoce por su habilidad de abordar desde nuevos enfoques los problemas y dificultades, pudiendo plantear alternativas impensadas.', 1, 3),
+    (7, 'CIE1.1', 'Es consultado por pares y subordinados porque se le reconoce por su habilidad de abordar desde nuevos enfoques los problemas y dificultades, pudiendo plantear alternativas impensadas.', 1, 1, 3),
     (8, 'CIE1.2', 'Es intelectualmente curioso, le gusta estar informado y mantenerse en constante aprendizaje para aplicar los conocimientos a la organización.', 1, 1, 3),
     (9, 'CIE1.3', 'Plantea mejoras o soluciones nuevas a problemas sencillos y complejos, garantizando su efectividad y calidad.', 1, 1, 3);
 

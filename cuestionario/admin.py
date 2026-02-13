@@ -94,7 +94,7 @@ class EvaluacionJefaturaAdmin(admin.ModelAdmin):
 
 @admin.register(ResultadoConsolidado)
 class ResultadoConsolidadoAdmin(admin.ModelAdmin):
-    list_display = ('trabajador', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'puntaje_autoev', 'puntaje_jefe', 'diferencia', 'periodo')
+    list_display = ('trabajador', 'get_nivel_jerarquico', 'codigo_excel', 'get_competencia', 'puntaje_jefe', 'puntaje_autoev', 'diferencia', 'periodo')
     list_filter = ('periodo', 'trabajador')
     readonly_fields = ('diferencia',)
     ordering = ('codigo_excel__id_textos_evaluacion',)

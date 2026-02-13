@@ -204,7 +204,7 @@ INSERT INTO TEXTOS_EVALUACION
     (ID_TEXTOS_EVALUACION, CODIGO_EXCEL, TEXTO, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
     (19, 'ASO1.1', 'Resuelve problemas rutinarios de forma efectiva.', 2, 6, 1),
-    (20, 'ASO1.2', 'Acude a sus superiores o pares para crear alternativas que le permitan resolver los problemas con mayor grado de dificultad.', 6, 1),
+    (20, 'ASO1.2', 'Acude a sus superiores o pares para crear alternativas que le permitan resolver los problemas con mayor grado de dificultad.', 2, 6, 1),
     (21, 'ASO1.3', 'Logra detectar las variables que influyen en el problema de forma oportuna.', 2, 6, 1),
     (22, 'AST1.1', 'Utiliza eficazmente datos históricos y actuales como ayuda para prever tendencias futuras, siendo efectivo en crear contingencias para que no afecten los resultados.', 2, 6, 2),
     (23, 'AST1.2', 'Analiza las relaciones entre las distintas partes y causales de un problema, anticipándose a los obstáculos y creando alternativas.', 2, 6, 2),

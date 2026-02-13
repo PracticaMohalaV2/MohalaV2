@@ -158,6 +158,11 @@ class TextosEvaluacion(models.Model):
     id_textos_evaluacion = models.AutoField(primary_key=True)
     codigo_excel = models.CharField(max_length=10, unique=True)
     texto = models.TextField()
+    dimension = models.ForeignKey(
+        'Dimension', 
+        on_delete=models.DO_NOTHING, 
+        db_column='dimension_id_dimension'
+    )
     competencia = models.ForeignKey(
         'Competencia', 
         on_delete=models.DO_NOTHING, 
@@ -300,6 +305,45 @@ class ResultadoConsolidado(models.Model):
         managed = False
         db_table = 'RESULTADO_CONSOLIDADO'
         unique_together = (('trabajador', 'codigo_excel', 'periodo'),)
+
+# =========================
+# Tabla Descripcion Respuesta
+# =========================
+class DescripcionRespuesta(models.Model):
+    id_descripcion_respuesta = models.AutoField(primary_key=True)
+    titulo = models.CharField(max_length=100)
+    descripcion = models.TextField()
+    codigo_excel = models.ForeignKey(
+        'TextosEvaluacion', 
+        on_delete=models.DO_NOTHING, 
+        to_field='codigo_excel', 
+        db_column='codigo_excel'
+    )
+    escala = models.ForeignKey(
+        'Escala', 
+        on_delete=models.DO_NOTHING, 
+        db_column='escala_id_escala'
+    )
+    dimension = models.ForeignKey(
+        'Dimension', 
+        on_delete=models.DO_NOTHING, 
+        db_column='dimension_id_dimension'
+    )
+    competencia = models.ForeignKey(
+        'Competencia', 
+        on_delete=models.DO_NOTHING, 
+        db_column='competencia_id_competencia'
+    )
+    nivel_jerarquico = models.ForeignKey(
+        'NivelJerarquico', 
+        on_delete=models.DO_NOTHING, 
+        db_column='nivel_jerarquico_id_nivel_jerarquico'
+    )
+
+    class Meta:
+        managed = False
+        db_table = 'DESCRIPCION_RESPUESTA'
+        unique_together = (('codigo_excel', 'nivel_jerarquico', 'escala'),)
 
 # ==========================================================
 # SIGNALS: Automatización de creación de usuarios para Login

@@ -4,7 +4,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import (
     Dimension, Departamento, NivelJerarquico, Cargo, Trabajador, 
     Competencia, TextosEvaluacion, Autoevaluacion, 
-    EvaluacionJefatura, ResultadoConsolidado, Escala
+    EvaluacionJefatura, ResultadoConsolidado, Escala,
+    DescripcionRespuesta
 )
 
 # --- Configuración Estética ---
@@ -106,6 +107,19 @@ class ResultadoConsolidadoAdmin(admin.ModelAdmin):
     @admin.display(description='Competencia')
     def get_competencia(self, obj):
         return obj.codigo_excel.competencia if obj.codigo_excel else "-"
+
+@admin.register(DescripcionRespuesta)
+class DescripcionRespuestaAdmin(admin.ModelAdmin):
+    list_display = ('id_descripcion_respuesta', 'codigo_excel', 'get_descripcion_corta', 'escala', 'titulo', 'competencia', 'nivel_jerarquico')
+    list_filter = ('nivel_jerarquico', 'competencia__dimension', 'competencia', 'escala')
+    search_fields = ('codigo_excel__codigo_excel', 'titulo', 'descripcion')
+    ordering = ('id_descripcion_respuesta',)
+
+    @admin.display(description='Descripción')
+    def get_descripcion_corta(self, obj):
+        if obj.descripcion and len(obj.descripcion) > 50:
+            return obj.descripcion[:50] + "..."
+        return obj.descripcion
 
 # Registros simples
 admin.site.register(Dimension)

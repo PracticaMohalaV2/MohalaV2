@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from cuestionario.models import Trabajador, TextosEvaluacion, Autoevaluacion, EvaluacionJefatura, Escala
+from cuestionario.models import (
+    Trabajador, TextosEvaluacion, Autoevaluacion, 
+    EvaluacionJefatura, Escala, DescripcionRespuesta
+)
 from django.db import transaction
 from .calculos import generar_consolidado 
 
@@ -43,6 +46,10 @@ def cuestionario_autoevaluacion(request, trabajador_id, dimension=None):
         competencia__dimension__nombre_dimension__icontains=dimension
     ).select_related('competencia__dimension').order_by('id_textos_evaluacion')
 
+    descripciones_qs = DescripcionRespuesta.objects.filter(
+        nivel_jerarquico=trabajador.nivel_jerarquico
+    ).select_related('escala')
+
     if request.method == 'POST':
         with transaction.atomic():
             for pregunta in preguntas_qs:
@@ -65,7 +72,12 @@ def cuestionario_autoevaluacion(request, trabajador_id, dimension=None):
                     )
         return redirect('autoevaluacion_inicio', trabajador_id=trabajador.id_trabajador)
 
-    context = {'trabajador': trabajador, 'preguntas': preguntas_qs, 'dimension': dimension}
+    context = {
+        'trabajador': trabajador, 
+        'preguntas': preguntas_qs, 
+        'dimension': dimension,
+        'descripciones': descripciones_qs
+    }
     return render(request, 'cuestionario/autoevaluacion.html', context)
 
 def finalizar_autoevaluacion(request, trabajador_id):
@@ -128,6 +140,10 @@ def cuestionario_jefatura(request, evaluador_id, evaluado_id, dimension=None):
         competencia__dimension__nombre_dimension__icontains=dimension
     ).select_related('competencia__dimension').order_by('id_textos_evaluacion')
 
+    descripciones_qs = DescripcionRespuesta.objects.filter(
+        nivel_jerarquico=evaluado.nivel_jerarquico
+    ).select_related('escala')
+
     if request.method == 'POST':
         with transaction.atomic():
             for pregunta in preguntas_qs:
@@ -151,7 +167,13 @@ def cuestionario_jefatura(request, evaluador_id, evaluado_id, dimension=None):
                     )
         return redirect('evaluacion_jefe_inicio', evaluador_id=evaluador.id_trabajador, evaluado_id=evaluado.id_trabajador)
 
-    context = {'evaluador': evaluador, 'evaluado': evaluado, 'preguntas': preguntas_qs, 'dimension': dimension}
+    context = {
+        'evaluador': evaluador, 
+        'evaluado': evaluado, 
+        'preguntas': preguntas_qs, 
+        'dimension': dimension,
+        'descripciones': descripciones_qs
+    }
     return render(request, 'cuestionario/evaluacion_jefe.html', context)
 
 def finalizar_evaluacion_jefe(request, evaluador_id, evaluado_id):

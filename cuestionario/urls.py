@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from . import logica as views
-from .logica import validador_login, seguimiento # <--- Importamos el nuevo archivo
+from .logica import validador_login, seguimiento, detalle_seguimiento
 
 urlpatterns = [
     path('login/', validador_login.login_view, name='login'),
@@ -11,6 +11,10 @@ urlpatterns = [
     path('', views.index, name='index'),
     
     path('seguimiento/', seguimiento.panel_seguimiento, name='seguimiento_admin'),
+    
+    path('seguimiento/detalle/<int:trabajador_id>/', 
+         detalle_seguimiento.detalle_resultado, 
+         name='detalle_resultado'),
     
     path('autoevaluacion/<int:trabajador_id>/', 
          views.cuestionario_autoevaluacion, 

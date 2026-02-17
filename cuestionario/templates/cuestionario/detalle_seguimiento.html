@@ -1,0 +1,112 @@
+{% extends "cuestionario/base.html" %}
+
+{% block title %}Detalle de Evaluación - {{ trabajador.nombre }}{% endblock %}
+
+{% block content %}
+<section>
+    <header>
+        <a href="{% url 'panel_seguimiento' %}" class="button small">← Volver a Seguimiento</a>
+        
+        <h2 style="margin-top: 1em;">Detalle de Evaluación</h2>
+        <p>Colaborador: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
+        Cargo: {{ trabajador.cargo.nombre_cargo }}</p>
+    </header>
+
+    <div style="background: rgba(255,255,255,0.05); padding: 1.5em; border-radius: 8px; margin-bottom: 2em;">
+        <div class="row">
+            <div class="col-6">
+                <strong>Autoevaluación finalizada:</strong><br>
+                {% if timestamp_auto %}
+                    {{ timestamp_auto|date:"d/m/Y H:i" }}
+                {% else %}
+                    <span style="opacity: 0.5;">Pendiente</span>
+                {% endif %}
+            </div>
+            <div class="col-6">
+                <strong>Evaluación Jefatura finalizada:</strong><br>
+                {% if timestamp_jefe %}
+                    {{ timestamp_jefe|date:"d/m/Y H:i" }}
+                {% else %}
+                    <span style="opacity: 0.5;">N/A o Pendiente</span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="alt">
+            <thead>
+                <tr>
+                    <th style="width: 8%;">Código</th>
+                    <th style="width: 40%;">Competencia / Indicador</th>
+                    <th style="text-align: center; width: 13%;">AutoEv</th>
+                    <th style="text-align: center; width: 13%;">Ev. Jefe</th>
+                    <th style="text-align: center; width: 13%;">Diferencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in resultados %}
+                <tr>
+                    <td style="text-align: center;">
+                        <strong>{{ r.codigo_excel.codigo_excel }}</strong>
+                    </td>
+                    <td>
+                        <span style="color: {% if 'Funcional' in r.dimension.nombre_dimension %}#2196F3{% else %}#51ff85{% endif %}; font-weight: bold;">
+                            {{ r.competencia.nombre_competencia }}
+                        </span><br>
+                        <small style="opacity: 0.7; display: block; margin-top: 4px;">{{ r.codigo_excel.texto }}</small>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        <span style="background: rgba(81, 255, 133, 0.2); color: #51ff85; padding: 0.4em 0.8em; border-radius: 15px; font-weight: bold;">
+                            {{ r.puntaje_autoev }}
+                        </span>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        {% if r.puntaje_jefe > 0 %}
+                            <span style="background: rgba(33, 150, 243, 0.2); color: #2196F3; padding: 0.4em 0.8em; border-radius: 15px; font-weight: bold;">
+                                {{ r.puntaje_jefe }}
+                            </span>
+                        {% else %}
+                            <span style="opacity: 0.3;">N/A</span>
+                        {% endif %}
+                    </td>
+                    <td style="text-align: center; vertical-align: middle;">
+                        {% if r.diferencia != 0 %}
+                            <span style="
+                                {% if r.diferencia > 0 %}background: rgba(81, 255, 133, 0.2); color: #51ff85;
+                                {% elif r.diferencia < 0 %}background: rgba(255, 81, 81, 0.2); color: #ff5151;
+                                {% endif %}
+                                padding: 0.4em 0.8em; border-radius: 15px; font-weight: bold;">
+                                {% if r.diferencia > 0 %}+{% endif %}{{ r.diferencia|stringformat:".1f" }}
+                            </span>
+                        {% else %}
+                            <span style="opacity: 0.3;">---</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 3em; opacity: 0.5;">
+                        No hay datos consolidados disponibles para este colaborador.
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div style="background: rgba(255,255,255,0.05); padding: 2em; border-radius: 8px; border-left: 5px solid #51ff85; margin-top: 2em;">
+        <h4>Diferencia Promedio General</h4>
+        <p style="font-size: 1.5em; margin: 0;">
+            {% if diff_promedio is not None %}
+                <strong style="color: {% if diff_promedio > 0 %}#51ff85{% elif diff_promedio < 0 %}#ff5151{% else %}#fff{% endif %};">
+                    {% if diff_promedio > 0 %}+{% endif %}{{ diff_promedio|stringformat:".2f" }}
+                </strong>
+            {% else %}
+                <span style="opacity: 0.5;">N/A</span>
+            {% endif %}
+        </p>
+    </div>
+
+</section>
+{% endblock %}

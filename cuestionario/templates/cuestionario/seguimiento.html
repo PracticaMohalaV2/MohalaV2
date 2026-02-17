@@ -60,9 +60,11 @@
 
                     <td style="text-align: center;">
                         {% if t.diff_promedio is not None %}
-                            <strong>{{ t.diff_promedio|stringformat:".2f" }}</strong>
+                            <a href="{% url 'detalle_resultado' t.id_trabajador %}" class="button small primary">
+                                Ver Detalle
+                            </a>
                         {% else %}
-                            <small>---</small>
+                            <small style="opacity: 0.3;">---</small>
                         {% endif %}
                     </td>
                 </tr>

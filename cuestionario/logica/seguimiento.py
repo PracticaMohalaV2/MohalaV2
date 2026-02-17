@@ -12,7 +12,9 @@ def panel_seguimiento(request):
     
     total_por_realizar = 0
     autos_listas = 0
+    autos_pendientes = 0
     jefaturas_listas = 0
+    jefaturas_pendientes = 0
 
     for t in trabajadores:
         # Autoevaluación
@@ -20,6 +22,7 @@ def panel_seguimiento(request):
         if t.auto_lista:
             autos_listas += 1
         else:
+            autos_pendientes += 1
             total_por_realizar += 1
         
         # Jefatura
@@ -29,6 +32,7 @@ def panel_seguimiento(request):
             if t.jefe_lista:
                 jefaturas_listas += 1
             else:
+                jefaturas_pendientes += 1
                 total_por_realizar += 1
         else:
             t.tiene_jefe = False
@@ -44,6 +48,8 @@ def panel_seguimiento(request):
         'trabajadores': trabajadores,
         'total_pendientes': total_por_realizar,
         'autos_listas': autos_listas,
+        'autos_pendientes': autos_pendientes,
         'jefaturas_listas': jefaturas_listas,
+        'jefaturas_pendientes': jefaturas_pendientes,
     }
     return render(request, 'cuestionario/seguimiento.html', context)

@@ -21,8 +21,9 @@ def detalle_resultado(request, trabajador_id):
     auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True).first()
     jefe = EvaluacionJefatura.objects.filter(trabajador_evaluado=trabajador, estado_finalizacion=True).first()
     
-    timestamp_auto = auto.fecha_finalizacion if auto else None
-    timestamp_jefe = jefe.fecha_finalizacion if jefe else None
+    # Usar momento_evaluacion en lugar de fecha_finalizacion
+    timestamp_auto = auto.momento_evaluacion if auto else None
+    timestamp_jefe = jefe.momento_evaluacion if jefe else None
     
     context = {
         'trabajador': trabajador,

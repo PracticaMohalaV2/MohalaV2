@@ -1,0 +1,11 @@
+#sidebar {
+    width: 13em !important;
+}
+
+#sidebar + #wrapper {
+    margin-left: 13em !important;
+}
+
+#sidebar + #wrapper + #footer {
+    margin-left: 13em !important;
+}

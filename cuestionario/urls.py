@@ -13,7 +13,7 @@ urlpatterns = [
     path('seguimiento/', seguimiento.panel_seguimiento, name='seguimiento_admin'),
     
     path('seguimiento/detalle/<int:trabajador_id>/', 
-         detalle_seguimiento.detalle_resultado, 
+         detalle_seguimiento.detalle_seguimiento, 
          name='detalle_seguimiento'),
     
     path('autoevaluacion/<int:trabajador_id>/', 

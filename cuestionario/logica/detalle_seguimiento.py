@@ -4,7 +4,7 @@ from django.db.models import Avg
 from cuestionario.models import Trabajador, Autoevaluacion, EvaluacionJefatura, ResultadoConsolidado
 
 @login_required
-def detalle_resultado(request, trabajador_id):
+def detalle_seguimiento(request, trabajador_id):
     if not request.user.is_superuser:
         return redirect('index')
     

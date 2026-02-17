@@ -22,9 +22,9 @@
             <table class="alt">
                 <thead>
                     <tr style="background: {% if dimension == 'Organizacional' %}rgba(81, 255, 133, 0.1){% else %}rgba(33, 150, 243, 0.1){% endif %};">
-                        <th style="width: 7%;">Código</th>
-                        <th style="width: 60%;">Competencia</th>
-                        <th style="width: 33%;">Escala y Criterio de Evaluación</th>
+                        <th style="width: 6%;">Código</th>
+                        <th style="width: 47%;">Competencia</th>
+                        <th style="width: 47%;">Escala y Criterio de Evaluación</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,7 @@
                     <tr>
                         <td style="vertical-align: middle; text-align: center;"><strong>{{ p.codigo_excel }}</strong></td>
                         <td style="vertical-align: top;">
-                            <span style="font-weight: bold; color: {% if dimension == 'Organizacional' %}#51ff85{% else %}#2196F3{% endif %};">
+                            <span style="font-weight: bold; color: {% if dimension == 'Organizacional' %}#51ff85{% else %}#2196F3{% endif %}; ; font-size: 1.1em;"">
                                 {{ p.competencia.nombre_competencia }}
                             </span><br>
                             <small style="line-height: 1.2; display: block; margin-top: 5px; opacity: 0.8;">{{ p.texto }}</small>
@@ -51,7 +51,7 @@
                                     <label for="radio_{{ p.id_textos_evaluacion }}_{{ i }}" style="margin-bottom: 0; cursor: pointer; flex: 1;">
                                         {% for d in descripciones %}
                                             {% if d.codigo_excel_id == p.codigo_excel and d.escala_id|stringformat:"i" == i %}
-                                                <span style="font-weight: bold; color: #fff;">{{ i }}. {{ d.escala.descripcion }}:</span>
+                                                <span style="font-weight: bold; color: #fff; font-size: 0.9em;">{{ i }}. {{ d.escala.descripcion }}:</span>
                                                 <span style="font-size: 0.85em; display: block; line-height: 1.3; opacity: 0.9;">{{ d.descripcion }}</span>
                                             {% endif %}
                                         {% endfor %}

@@ -12,7 +12,7 @@
         {% endif %}
         
         <h2 style="margin-top: 1em;">Reporte de Evaluación Finalizada</h2>
-        <p>Colaborador: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }}</strong><br>
+        <p>Colaborador: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
         Cargo: {{ trabajador.cargo.nombre_cargo }} | Fecha de Cierre: {{ fecha_cierre|date:"d/m/Y" }}</p>
     </header>
 

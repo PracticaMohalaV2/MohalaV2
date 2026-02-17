@@ -11,7 +11,7 @@
         <h3 style="color: {% if dimension == 'Organizacional' %}#51ff85{% else %}#2196F3{% endif %};">
             Dimensión: {{ dimension }}
         </h3>
-        <p>Registrando respuestas para: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }}</strong><br>
+        <p>Registrando respuestas para: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
         Nivel Jerárquico: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em></p>
     </header>
 

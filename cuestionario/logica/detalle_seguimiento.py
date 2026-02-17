@@ -8,20 +8,23 @@ def detalle_resultado(request, trabajador_id):
     if not request.user.is_superuser:
         return redirect('index')
     
-    trabajador = Trabajador.objects.get(id_trabajador=trabajador_id)
+    try:
+        trabajador = Trabajador.objects.select_related('cargo').get(id_trabajador=trabajador_id)
+    except Trabajador.DoesNotExist:
+        return redirect('seguimiento_admin')
     
     resultados = ResultadoConsolidado.objects.filter(
         trabajador=trabajador
     ).select_related('codigo_excel', 'competencia', 'dimension').order_by('codigo_excel__codigo_excel')
     
-    # Calcular diferencia promedio total
+    # Calcular diferencia promedio total (igual que en seguimiento.py)
     diff_promedio = resultados.aggregate(Avg('diferencia'))['diferencia__avg']
     
     # Obtener timestamps de finalización
     auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True).first()
     jefe = EvaluacionJefatura.objects.filter(trabajador_evaluado=trabajador, estado_finalizacion=True).first()
     
-    # Usar momento_evaluacion en lugar de fecha_finalizacion
+    # Usar momento_evaluacion
     timestamp_auto = auto.momento_evaluacion if auto else None
     timestamp_jefe = jefe.momento_evaluacion if jefe else None
     

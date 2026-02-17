@@ -15,16 +15,13 @@ def detalle_seguimiento(request, trabajador_id):
     
     resultados = ResultadoConsolidado.objects.filter(
         trabajador=trabajador
-    ).select_related('codigo_excel', 'competencia', 'dimension').order_by('codigo_excel__codigo_excel')
+    ).select_related('codigo_excel', 'competencia', 'dimension').order_by('codigo_excel__id_textos_evaluacion')
     
-    # Calcular diferencia promedio total (igual que en seguimiento.py)
     diff_promedio = resultados.aggregate(Avg('diferencia'))['diferencia__avg']
     
-    # Obtener timestamps de finalización
     auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True).first()
     jefe = EvaluacionJefatura.objects.filter(trabajador_evaluado=trabajador, estado_finalizacion=True).first()
     
-    # Usar momento_evaluacion
     timestamp_auto = auto.momento_evaluacion if auto else None
     timestamp_jefe = jefe.momento_evaluacion if jefe else None
     

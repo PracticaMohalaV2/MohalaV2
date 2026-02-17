@@ -33,4 +33,4 @@ def detalle_resultado(request, trabajador_id):
         'timestamp_jefe': timestamp_jefe,
     }
     
-    return render(request, 'cuestionario/detalle_resultado.html', context)
+    return render(request, 'cuestionario/detalle_seguimiento.html', context)

@@ -14,7 +14,7 @@ urlpatterns = [
     
     path('seguimiento/detalle/<int:trabajador_id>/', 
          detalle_seguimiento.detalle_resultado, 
-         name='detalle_resultado'),
+         name='detalle_seguimiento'),
     
     path('autoevaluacion/<int:trabajador_id>/', 
          views.cuestionario_autoevaluacion, 

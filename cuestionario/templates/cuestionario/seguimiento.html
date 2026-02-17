@@ -26,7 +26,7 @@
                     <th style="text-align: center;">Nivel Jerárquico</th>
                     <th>Autoevaluación</th>
                     <th style="text-align: center;">Ev. Jefatura</th>
-                    <th style="text-align: center;">Brecha Promedio por Pregunta</th>
+                    <th style="text-align: center;">Ver Detalle</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,10 +35,10 @@
                     <td>
                         <strong>{{ t.nombre }} {{ t.apellido_paterno }} {{ t.apellido_materno }}</strong><br>
                         <small>{{ t.cargo.nombre_cargo }}</small>
-                    <td>
-                    <td style="text-align: center;">
+                    </td> <td style="text-align: center;">
                         <strong>{{ t.nivel_jerarquico }}</strong><br>
                     </td>
+                    
                     <td style="text-align: center;">
                         {% if t.auto_lista %}
                             <span style="color: #51ff85;">✅ Lista</span>
@@ -46,6 +46,7 @@
                             <span style="color: #ffc107;">⏳ Pendiente</span>
                         {% endif %}
                     </td>
+
                     <td style="text-align: center;">
                         {% if not t.tiene_jefe %}
                             <span style="opacity: 0.3;">N/A</span>
@@ -55,6 +56,7 @@
                             <span style="color: #ffc107;">⏳ Pendiente</span>
                         {% endif %}
                     </td>
+
                     <td style="text-align: center;">
                         {% if t.diff_promedio is not None %}
                             <strong>{{ t.diff_promedio|stringformat:".2f" }}</strong>
@@ -73,8 +75,3 @@
     </ul>
 </section>
 {% endblock %}
-
-
-
-
-

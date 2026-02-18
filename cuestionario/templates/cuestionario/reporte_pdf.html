@@ -66,6 +66,7 @@
     <div class="header-info">
         <p><strong>Colaborador:</strong> {{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</p>
         <p><strong>Cargo:</strong> {{ trabajador.cargo.nombre_cargo }}</p>
+        <p><strong>Nivel:</strong> {{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</p>
         <p><strong>Autoevaluación finalizada:</strong> {% if timestamp_auto %}{{ timestamp_auto|date:"d/m/Y H:i" }}{% else %}Pendiente{% endif %}</p>
         <p><strong>Evaluación Jefatura finalizada:</strong> {% if timestamp_jefe %}{{ timestamp_jefe|date:"d/m/Y H:i" }}{% else %}N/A{% endif %}</p>
     </div>

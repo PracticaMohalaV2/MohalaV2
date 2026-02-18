@@ -16,6 +16,10 @@ urlpatterns = [
          detalle_seguimiento.detalle_seguimiento, 
          name='detalle_seguimiento'),
     
+    path('seguimiento/detalle/<int:trabajador_id>/pdf/', 
+         detalle_seguimiento.generar_pdf_detalle, 
+         name='generar_pdf_detalle'),
+    
     path('autoevaluacion/<int:trabajador_id>/', 
          views.cuestionario_autoevaluacion, 
          name='autoevaluacion_inicio'),

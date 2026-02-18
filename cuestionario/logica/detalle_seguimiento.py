@@ -9,7 +9,7 @@ def detalle_seguimiento(request, trabajador_id):
         return redirect('index')
     
     try:
-        trabajador = Trabajador.objects.select_related('cargo').get(id_trabajador=trabajador_id)
+        trabajador = Trabajador.objects.select_related('cargo', 'nivel_jerarquico', 'id_jefe_directo').get(id_trabajador=trabajador_id)
     except Trabajador.DoesNotExist:
         return redirect('seguimiento_admin')
     

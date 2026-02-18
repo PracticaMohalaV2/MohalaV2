@@ -18,7 +18,7 @@ def generar_pdf_detalle(request, trabajador_id):
         return redirect('index')
     
     try:
-        trabajador = Trabajador.objects.select_related('cargo').get(id_trabajador=trabajador_id)
+        trabajador = Trabajador.objects.select_related('cargo', 'nivel_jerarquico', 'id_jefe_directo').get(id_trabajador=trabajador_id)
     except Trabajador.DoesNotExist:
         return redirect('seguimiento_admin')
     
@@ -32,9 +32,8 @@ def generar_pdf_detalle(request, trabajador_id):
     auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True).first()
     jefe = EvaluacionJefatura.objects.filter(trabajador_evaluado=trabajador, estado_finalizacion=True).first()
     
-    # SIMPLIFICADO: Usar el mismo formato que el template HTML
-    timestamp_auto = auto.momento_evaluacion if auto else None
-    timestamp_jefe = jefe.momento_evaluacion if jefe else None
+    timestamp_auto = auto.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if auto else "Pendiente"
+    timestamp_jefe = jefe.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if jefe else "N/A"
     
     # Crear el PDF
     buffer = BytesIO()
@@ -65,12 +64,15 @@ def generar_pdf_detalle(request, trabajador_id):
     elements.append(Paragraph("Reporte de Evaluación de Desempeño", title_style))
     elements.append(Spacer(1, 0.2*inch))
     
-    # Info del trabajador - USANDO EL FORMATO DEL TEMPLATE
+    jefe_directo_nombre = f"{trabajador.id_jefe_directo.nombre} {trabajador.id_jefe_directo.apellido_paterno} {trabajador.id_jefe_directo.apellido_materno}" if trabajador.id_jefe_directo else "N/A"
+    
     info_data = [
         ['Colaborador:', f"{trabajador.nombre} {trabajador.apellido_paterno} {trabajador.apellido_materno}"],
         ['Cargo:', trabajador.cargo.nombre_cargo],
-        ['Autoevaluación finalizada:', timestamp_auto.strftime("%d/%m/%Y %H:%M") if timestamp_auto else "Pendiente"],
-        ['Evaluación Jefatura finalizada:', timestamp_jefe.strftime("%d/%m/%Y %H:%M") if timestamp_jefe else "N/A"]
+        ['Nivel Jerárquico:', trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
+        ['Jefatura Directa:', jefe_directo_nombre],
+        ['Autoevaluación finalizada:', timestamp_auto],
+        ['Evaluación Jefatura finalizada:', timestamp_jefe]
     ]
     
     info_table = Table(info_data, colWidths=[2.5*inch, 4*inch])

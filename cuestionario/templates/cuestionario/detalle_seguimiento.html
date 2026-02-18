@@ -9,7 +9,14 @@
         
         <h2 style="margin-top: 1em;">Detalle de Evaluación</h2>
         <p>Colaborador: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
-        Cargo: {{ trabajador.cargo.nombre_cargo }} | Nivel: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em></p>
+        Cargo: {{ trabajador.cargo.nombre_cargo }} | Nivel: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em><br>
+        Jefatura Directa: 
+        {% if trabajador.id_jefe_directo %}
+            <strong>{{ trabajador.id_jefe_directo.nombre }} {{ trabajador.id_jefe_directo.apellido_paterno }} {{ trabajador.id_jefe_directo.apellido_materno }}</strong>
+        {% else %}
+            <em>N/A</em>
+        {% endif %}
+        </p>
     </header>
 
     <div style="background: rgba(255,255,255,0.05); padding: 1.5em; border-radius: 8px; margin-bottom: 2em;">

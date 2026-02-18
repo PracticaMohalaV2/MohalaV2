@@ -1,7 +1,6 @@
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.utils import timezone
 from cuestionario.models import Trabajador, Autoevaluacion, EvaluacionJefatura, ResultadoConsolidado
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
@@ -10,7 +9,6 @@ from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.enums import TA_CENTER
 from io import BytesIO
-import pytz  
 
 
 @login_required
@@ -34,26 +32,9 @@ def generar_pdf_detalle(request, trabajador_id):
     auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True).first()
     jefe = EvaluacionJefatura.objects.filter(trabajador_evaluado=trabajador, estado_finalizacion=True).first()
     
-    # Convertir a zona horaria de Chile
-    chile_tz = pytz.timezone('America/Santiago')
-    
-    if auto:
-        timestamp_auto_utc = auto.momento_evaluacion
-        if timezone.is_aware(timestamp_auto_utc):
-            timestamp_auto = timestamp_auto_utc.astimezone(chile_tz).strftime("%d/%m/%Y %H:%M")
-        else:
-            timestamp_auto = timestamp_auto_utc.strftime("%d/%m/%Y %H:%M")
-    else:
-        timestamp_auto = "Pendiente"
-    
-    if jefe:
-        timestamp_jefe_utc = jefe.momento_evaluacion
-        if timezone.is_aware(timestamp_jefe_utc):
-            timestamp_jefe = timestamp_jefe_utc.astimezone(chile_tz).strftime("%d/%m/%Y %H:%M")
-        else:
-            timestamp_jefe = timestamp_jefe_utc.strftime("%d/%m/%Y %H:%M")
-    else:
-        timestamp_jefe = "N/A"
+    # SIMPLIFICADO: Usar el mismo formato que el template HTML
+    timestamp_auto = auto.momento_evaluacion if auto else None
+    timestamp_jefe = jefe.momento_evaluacion if jefe else None
     
     # Crear el PDF
     buffer = BytesIO()
@@ -84,12 +65,12 @@ def generar_pdf_detalle(request, trabajador_id):
     elements.append(Paragraph("Reporte de Evaluación de Desempeño", title_style))
     elements.append(Spacer(1, 0.2*inch))
     
-    # Info del trabajador
+    # Info del trabajador - USANDO EL FORMATO DEL TEMPLATE
     info_data = [
         ['Colaborador:', f"{trabajador.nombre} {trabajador.apellido_paterno} {trabajador.apellido_materno}"],
         ['Cargo:', trabajador.cargo.nombre_cargo],
-        ['Autoevaluación finalizada:', timestamp_auto],
-        ['Evaluación Jefatura finalizada:', timestamp_jefe]
+        ['Autoevaluación finalizada:', timestamp_auto.strftime("%d/%m/%Y %H:%M") if timestamp_auto else "Pendiente"],
+        ['Evaluación Jefatura finalizada:', timestamp_jefe.strftime("%d/%m/%Y %H:%M") if timestamp_jefe else "N/A"]
     ]
     
     info_table = Table(info_data, colWidths=[2.5*inch, 4*inch])

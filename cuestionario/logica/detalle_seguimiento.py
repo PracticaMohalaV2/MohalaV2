@@ -4,8 +4,8 @@ from django.db.models import Avg
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from cuestionario.models import Trabajador, Autoevaluacion, EvaluacionJefatura, ResultadoConsolidado
-from weasyprint import HTML
-import tempfile
+from xhtml2pdf import pisa
+from io import BytesIO
 
 @login_required
 def detalle_seguimiento(request, trabajador_id):
@@ -92,12 +92,14 @@ def generar_pdf_detalle(request, trabajador_id):
     # Renderizar el template HTML
     html_string = render_to_string('cuestionario/reporte_pdf.html', context)
     
-    # Generar PDF
-    html = HTML(string=html_string)
-    result = html.write_pdf()
-    
     # Crear respuesta HTTP
-    response = HttpResponse(result, content_type='application/pdf')
-    response['Content-Disposition'] = f'inline; filename="reporte_{trabajador.nombre}_{trabajador.apellido_paterno}_{trabajador.apellido_materno}.pdf"'
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'inline; filename="reporte_{trabajador.nombre}_{trabajador.apellido_paterno}.pdf"'
+    
+    # Generar PDF con xhtml2pdf
+    pisa_status = pisa.CreatePDF(html_string, dest=response)
+    
+    if pisa_status.err:
+        return HttpResponse('Error al generar el PDF', status=500)
     
     return response

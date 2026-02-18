@@ -223,28 +223,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (1, 'NO LOGRA LO ESPERADO', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIO1.1', 1, 1, 1, 1),
-    (2, 'LOGRA PARCIALMENTE LO ESPERADO', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.1', 2, 1, 1, 1),
-    (3, 'LOGRA LO ESPERADO', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.1', 3, 1, 1, 1),
-    (4, 'SUPERA LO ESPERADO', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIO1.1', 4, 1, 1, 1);
+    (1, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIO1.1', 1, 1, 1, 1),
+    (2, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.1', 2, 1, 1, 1),
+    (3, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.1', 3, 1, 1, 1),
+    (4, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIO1.1', 4, 1, 1, 1);
 
 -- CIO1.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (5, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIO1.2', 1, 1, 1, 1),
-    (6, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIO1.2', 2, 1, 1, 1),
-    (7, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIO1.2', 3, 1, 1, 1),
-    (8, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIO1.2', 4, 1, 1, 1);
+    (5, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIO1.2', 1, 1, 1, 1),
+    (6, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.2', 2, 1, 1, 1),
+    (7, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.2', 3, 1, 1, 1),
+    (8, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIO1.2', 4, 1, 1, 1);
 
 -- CIO1.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (9, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIO1.3', 1, 1, 1, 1),
-    (10, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIO1.3', 2, 1, 1, 1),
-    (11, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIO1.3', 3, 1, 1, 1),
-    (12, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIO1.3', 4, 1, 1, 1);
+    (9, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIO1.3', 1, 1, 1, 1),
+    (10, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.3', 2, 1, 1, 1),
+    (11, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIO1.3', 3, 1, 1, 1),
+    (12, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIO1.3', 4, 1, 1, 1);
 
 -- Competencia: Creatividad / Nivel: Táctico
 
@@ -252,28 +252,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (13, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIT1.1', 1, 1, 1, 2),
-    (14, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIT1.1', 2, 1, 1, 2),
-    (15, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIT1.1', 3, 1, 1, 2),
-    (16, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIT1.1', 4, 1, 1, 2);
+    (13, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIT1.1', 1, 1, 1, 2),
+    (14, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIT1.1', 2, 1, 1, 2),
+    (15, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIT1.1', 3, 1, 1, 2),
+    (16, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIT1.1', 4, 1, 1, 2);
 
 -- CIT1.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (17, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIT1.2', 1, 1, 1, 2),
-    (18, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIT1.2', 2, 1, 1, 2),
-    (19, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIT1.2', 3, 1, 1, 2),
-    (20, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIT1.2', 4, 1, 1, 2);
+    (17, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIT1.2', 1, 1, 1, 2),
+    (18, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIT1.2', 2, 1, 1, 2),
+    (19, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIT1.2', 3, 1, 1, 2),
+    (20, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIT1.2', 4, 1, 1, 2);
 
 -- CIT1.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (21, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIT1.3', 1, 1, 1, 2),
-    (22, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIT1.3', 2, 1, 1, 2),
-    (23, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIT1.3', 3, 1, 1, 2),
-    (24, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIT1.3', 4, 1, 1, 2);
+    (21, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIT1.3', 1, 1, 1, 2),
+    (22, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIT1.3', 2, 1, 1, 2),
+    (23, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIT1.3', 3, 1, 1, 2),
+    (24, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIT1.3', 4, 1, 1, 2);
 
 -- Competencia: Creatvidad / Nivel: Estratégico
 
@@ -281,28 +281,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (25, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIE1.1', 1, 1, 1, 3),
-    (26, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIE1.1', 2, 1, 1, 3),
-    (27, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIE1.1', 3, 1, 1, 3),
-    (28, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIE1.1', 4, 1, 1, 3);
+    (25, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIE1.1', 1, 1, 1, 3),
+    (26, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIE1.1', 2, 1, 1, 3),
+    (27, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIE1.1', 3, 1, 1, 3),
+    (28, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIE1.1', 4, 1, 1, 3);
 
 -- CIE1.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (29, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIE1.2', 1, 1, 1, 3),
-    (30, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIE1.2', 2, 1, 1, 3),
-    (31, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIE1.2', 3, 1, 1, 3),
-    (32, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIE1.2', 4, 1, 1, 3);
+    (29, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIE1.2', 1, 1, 1, 3),
+    (30, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIE1.2', 2, 1, 1, 3),
+    (31, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIE1.2', 3, 1, 1, 3),
+    (32, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIE1.2', 4, 1, 1, 3);
 
 -- CIE1.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (33, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'CIE1.3', 1, 1, 1, 3),
-    (34, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'CIE1.3', 2, 1, 1, 3),
-    (35, 'LOGRA LO ESPERADO', 'Texto prueba.', 'CIE1.3', 3, 1, 1, 3),
-    (36, 'SUPERA LO ESPERADO', 'Texto prueba', 'CIE1.3', 4, 1, 1, 3);
+    (33, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'CIE1.3', 1, 1, 1, 3),
+    (34, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'CIE1.3', 2, 1, 1, 3),
+    (35, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'CIE1.3', 3, 1, 1, 3),
+    (36, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'CIE1.3', 4, 1, 1, 3);
 
 -- Competencia: Enfoque de Negocio / Nivel: Operativo
 
@@ -310,28 +310,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (37, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENO2.1', 1, 1, 2, 1),
-    (38, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENO2.1', 2, 1, 2, 1),
-    (39, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENO2.1', 3, 1, 2, 1),
-    (40, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENO2.1', 4, 1, 2, 1);
+    (37, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENO2.1', 1, 1, 2, 1),
+    (38, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENO2.1', 2, 1, 2, 1),
+    (39, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENO2.1', 3, 1, 2, 1),
+    (40, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENO2.1', 4, 1, 2, 1);
 
 -- ENO2.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (41, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENO2.2', 1, 1, 2, 1),
-    (42, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENO2.2', 2, 1, 2, 1),
-    (43, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENO2.2', 3, 1, 2, 1),
-    (44, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENO2.2', 4, 1, 2, 1);
+    (41, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENO2.2', 1, 1, 2, 1),
+    (42, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENO2.2', 2, 1, 2, 1),
+    (43, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENO2.2', 3, 1, 2, 1),
+    (44, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENO2.2', 4, 1, 2, 1);
 
 -- ENO2.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (45, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENO2.3', 1, 1, 2, 1),
-    (46, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENO2.3', 2, 1, 2, 1),
-    (47, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENO2.3', 3, 1, 2, 1),
-    (48, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENO2.3', 4, 1, 2, 1);
+    (45, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENO2.3', 1, 1, 2, 1),
+    (46, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENO2.3', 2, 1, 2, 1),
+    (47, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENO2.3', 3, 1, 2, 1),
+    (48, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENO2.3', 4, 1, 2, 1);
 
 -- Competencia: Enfoque de Negocio / Nivel: Táctico
 
@@ -339,28 +339,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (49, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENT2.1', 1, 1, 2, 2),
-    (50, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENT2.1', 2, 1, 2, 2),
-    (51, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENT2.1', 3, 1, 2, 2),
-    (52, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENT2.1', 4, 1, 2, 2);
+    (49, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENT2.1', 1, 1, 2, 2),
+    (50, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENT2.1', 2, 1, 2, 2),
+    (51, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENT2.1', 3, 1, 2, 2),
+    (52, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENT2.1', 4, 1, 2, 2);
 
 -- ENT2.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (53, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENT2.2', 1, 1, 2, 2),
-    (54, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENT2.2', 2, 1, 2, 2),
-    (55, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENT2.2', 3, 1, 2, 2),
-    (56, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENT2.2', 4, 1, 2, 2);
+    (53, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENT2.2', 1, 1, 2, 2),
+    (54, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENT2.2', 2, 1, 2, 2),
+    (55, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENT2.2', 3, 1, 2, 2),
+    (56, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENT2.2', 4, 1, 2, 2);
 
 -- ENT2.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (57, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENT2.3', 1, 1, 2, 2),
-    (58, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENT2.3', 2, 1, 2, 2),
-    (59, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENT2.3', 3, 1, 2, 2),
-    (60, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENT2.3', 4, 1, 2, 2);
+    (57, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENT2.3', 1, 1, 2, 2),
+    (58, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENT2.3', 2, 1, 2, 2),
+    (59, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENT2.3', 3, 1, 2, 2),
+    (60, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENT2.3', 4, 1, 2, 2);
 
 -- Competencia: Enfoque de Negocio / Nivel: Estratégico
 
@@ -368,28 +368,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (61, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENE2.1', 1, 1, 2, 3),
-    (62, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENE2.1', 2, 1, 2, 3),
-    (63, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENE2.1', 3, 1, 2, 3),
-    (64, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENE2.1', 4, 1, 2, 3);
+    (61, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.1', 1, 1, 2, 2),
+    (62, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.1', 2, 1, 2, 2),
+    (63, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.1', 3, 1, 2, 2),
+    (64, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.1', 4, 1, 2, 2);
 
 -- ENE2.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (65, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENE2.2', 1, 1, 2, 3),
-    (66, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENE2.2', 2, 1, 2, 3),
-    (67, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENE2.2', 3, 1, 2, 3),
-    (68, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENE2.2', 4, 1, 2, 3);
+    (65, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.2', 1, 1, 2, 2),
+    (66, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.2', 2, 1, 2, 2),
+    (67, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.2', 3, 1, 2, 2),
+    (68, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.2', 4, 1, 2, 2);
 
 -- ENE2.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (69, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ENE2.3', 1, 1, 2, 3),
-    (70, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ENE2.3', 2, 1, 2, 3),
-    (71, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ENE2.3', 3, 1, 2, 3),
-    (72, 'SUPERA LO ESPERADO', 'Texto prueba', 'ENE2.3', 4, 1, 2, 3);
+    (69, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.3', 1, 1, 2, 2),
+    (70, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.3', 2, 1, 2, 2),
+    (71, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.3', 3, 1, 2, 2),
+    (72, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.3', 4, 1, 2, 2);
 
 -- Competencia: Análisis y Solución de Problemas / Nivel: Operativo
 
@@ -397,28 +397,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (73, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ASO1.1', 1, 2, 6, 1),
-    (74, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ASO1.1', 2, 2, 6, 1),
-    (75, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ASO1.1', 3, 2, 6, 1),
-    (76, 'SUPERA LO ESPERADO', 'Texto prueba', 'ASO1.1', 4, 2, 6, 1);
+    (73, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ASO1.1', 1, 2, 6, 1),
+    (74, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ASO1.1', 2, 2, 6, 1),
+    (75, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ASO1.1', 3, 2, 6, 1),
+    (76, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ASO1.1', 4, 2, 6, 1);
 
 -- ASO1.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (77, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ASO1.2', 1, 2, 6, 1),
-    (78, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ASO1.2', 2, 2, 6, 1),
-    (79, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ASO1.2', 3, 2, 6, 1),
-    (80, 'SUPERA LO ESPERADO', 'Texto prueba', 'ASO1.2', 4, 2, 6, 1);
+    (77, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ASO1.2', 1, 2, 6, 1),
+    (78, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ASO1.2', 2, 2, 6, 1),
+    (79, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ASO1.2', 3, 2, 6, 1),
+    (80, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ASO1.2', 4, 2, 6, 1);
 
 -- ASO1.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (81, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ASO1.3', 1, 2, 6, 1),
-    (82, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ASO1.3', 2, 2, 6, 1),
-    (83, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ASO1.3', 3, 2, 6, 1),
-    (84, 'SUPERA LO ESPERADO', 'Texto prueba', 'ASO1.3', 4, 2, 6, 1);
+    (81, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ASO1.3', 1, 2, 6, 1),
+    (82, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ASO1.3', 2, 2, 6, 1),
+    (83, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ASO1.3', 3, 2, 6, 1),
+    (84, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ASO1.3', 4, 2, 6, 1);
 
 -- Competencia: Análisis y Solución de Problemas / Nivel: Táctico
 
@@ -426,28 +426,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (85, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'AST1.1', 1, 2, 6, 2),
-    (86, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'AST1.1', 2, 2, 6, 2),
-    (87, 'LOGRA LO ESPERADO', 'Texto prueba.', 'AST1.1', 3, 2, 6, 2),
-    (88, 'SUPERA LO ESPERADO', 'Texto prueba', 'AST1.1', 4, 2, 6, 2);
+    (84, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'AST1.1', 1, 2, 6, 2),
+    (86, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'AST1.1', 2, 2, 6, 2),
+    (87, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'AST1.1', 3, 2, 6, 2),
+    (88, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'AST1.1', 4, 2, 6, 2);
 
 -- AST1.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (89, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'AST1.2', 1, 2, 6, 2),
-    (90, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'AST1.2', 2, 2, 6, 2),
-    (91, 'LOGRA LO ESPERADO', 'Texto prueba.', 'AST1.2', 3, 2, 6, 2),
-    (92, 'SUPERA LO ESPERADO', 'Texto prueba', 'AST1.2', 4, 2, 6, 2);
+    (89, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'AST1.2', 1, 2, 6, 2),
+    (90, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'AST1.2', 2, 2, 6, 2),
+    (91, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'AST1.2', 3, 2, 6, 2),
+    (92, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'AST1.2', 4, 2, 6, 2);
 
 -- AST1.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (93, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'AST1.3', 1, 2, 6, 2),
-    (94, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'AST1.3', 2, 2, 6, 2),
-    (95, 'LOGRA LO ESPERADO', 'Texto prueba.', 'AST1.3', 3, 2, 6, 2),
-    (96, 'SUPERA LO ESPERADO', 'Texto prueba', 'AST1.3', 4, 2, 6, 2);
+    (93, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'AST1.3', 1, 2, 6, 2),
+    (94, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'AST1.3', 2, 2, 6, 2),
+    (95, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'AST1.3', 3, 2, 6, 2),
+    (96, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'AST1.3', 4, 2, 6, 2);
 
 -- Competencia: Análisis y Solución de Problemas / Nivel: Estratégico
 
@@ -455,25 +455,25 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (97, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ASE1.1', 1, 2, 6, 3),
-    (98, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ASE1.1', 2, 2, 6, 3),
-    (99, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ASE1.1', 3, 2, 6, 3),
-    (100, 'SUPERA LO ESPERADO', 'Texto prueba', 'ASE1.1', 4, 2, 6, 3);
+    (97, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ASE1.1', 1, 2, 6, 3),
+    (98, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ASE1.1', 2, 2, 6, 3),
+    (99, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ASE1.1', 3, 2, 6, 3),
+    (100, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ASE1.1', 4, 2, 6, 3);
 
 -- ASE1.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (101, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ASE1.2', 1, 2, 6, 3),
-    (102, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ASE1.2', 2, 2, 6, 3),
-    (103, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ASE1.2', 3, 2, 6, 3),
-    (104, 'SUPERA LO ESPERADO', 'Texto prueba', 'ASE1.2', 4, 2, 6, 3);
+    (101, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ASE1.2', 1, 2, 6, 3),
+    (102, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ASE1.2', 2, 2, 6, 3),
+    (103, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ASE1.2', 3, 2, 6, 3),
+    (104, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ASE1.2', 4, 2, 6, 3);
 
 -- ASE1.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (105, 'NO LOGRA LO ESPERADO', 'Texto prueba', 'ASE1.3', 1, 2, 6, 3),
-    (106, 'LOGRA PARCIALMENTE LO ESPERADO', 'Texto prueba.', 'ASE1.3', 2, 2, 6, 3),
-    (107, 'LOGRA LO ESPERADO', 'Texto prueba.', 'ASE1.3', 3, 2, 6, 3),
-    (108, 'SUPERA LO ESPERADO', 'Texto prueba', 'ASE1.3', 4, 2, 6, 3);
+    (105, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ASE1.3', 1, 2, 6, 3),
+    (106, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ASE1.3', 2, 2, 6, 3),
+    (107, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ASE1.3', 3, 2, 6, 3),
+    (108, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ASE1.3', 4, 2, 6, 3);

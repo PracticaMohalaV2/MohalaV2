@@ -12,7 +12,7 @@
             Dimensión: {{ dimension }}
         </h3>
         <p>Registrando respuestas para: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
-        Nivel Jerárquico: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em></p>
+        Nivel: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em></p>
     </header>
 
     <form method="POST" onsubmit="this.btnSubmit.disabled=true; this.btnSubmit.innerText='Guardando...'; return true;">
@@ -23,8 +23,8 @@
                 <thead>
                     <tr style="background: {% if dimension == 'Organizacional' %}rgba(81, 255, 133, 0.1){% else %}rgba(33, 150, 243, 0.1){% endif %};">
                         <th style="width: 6%;">Código</th>
-                        <th style="width: 47%;">Competencia</th>
-                        <th style="width: 47%;">Escala y Criterio de Evaluación</th>
+                        <th style="width: 47%;">Competencia / Indicador</th>
+                        <th style="width: 47%;">Evaluación</th>
                     </tr>
                 </thead>
                 <tbody>

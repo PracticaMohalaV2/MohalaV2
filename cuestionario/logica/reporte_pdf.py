@@ -69,7 +69,7 @@ def generar_pdf_detalle(request, trabajador_id):
     info_data = [
         ['Colaborador:', f"{trabajador.nombre} {trabajador.apellido_paterno} {trabajador.apellido_materno}"],
         ['Cargo:', trabajador.cargo.nombre_cargo],
-        ['Nivel Jerárquico:', trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
+        ['Nivel:', trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
         ['Jefatura Directa:', jefe_directo_nombre],
         ['Autoevaluación finalizada:', timestamp_auto],
         ['Evaluación Jefatura finalizada:', timestamp_jefe]

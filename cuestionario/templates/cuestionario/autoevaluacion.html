@@ -38,25 +38,21 @@
                             <small style="line-height: 1.2; display: block; margin-top: 5px; opacity: 0.8;">{{ p.texto }}</small>
                         </td>
                         <td style="vertical-align: middle;">
-                            <!-- MODIFICADO: Cambié el contenedor padre para que use width: 100% -->
-                            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                            <div style="display: flex; flex-direction: column; gap: 8px;">
                                 {% for i in "1234" %}
-                                <!-- MODIFICADO: Agregué width: 100% y min-width: 0 -->
-                                <div style="background: rgba(255,255,255,0.03); padding: 8px; border-radius: 4px; display: flex; align-items: flex-start; gap: 10px; width: 100%; min-width: 0;">
+                                <div style="background: rgba(255,255,255,0.03); padding: 8px; border-radius: 4px; display: flex; align-items: flex-start; gap: 10px;">
                                     <input type="radio" 
                                            id="radio_{{ p.id_textos_evaluacion }}_{{ i }}"
                                            name="puntaje_{{ p.id_textos_evaluacion }}" 
                                            value="{{ i }}" 
                                            required
-                                           style="margin-top: 4px; transform: scale(0.6); flex-shrink: 0;">
+                                           style="margin-top: 4px; transform: scale(0.6);">
                                     
-                                    <!-- MODIFICADO: Agregué min-width: 0 y max-width: 100% -->
-                                    <label for="radio_{{ p.id_textos_evaluacion }}_{{ i }}" style="margin-bottom: 0; cursor: pointer; flex: 1; min-width: 0; max-width: 100%;">
+                                    <label for="radio_{{ p.id_textos_evaluacion }}_{{ i }}" style="margin-bottom: 0; cursor: pointer; flex: 1;">
                                         {% for d in descripciones %}
                                             {% if d.codigo_excel_id == p.codigo_excel and d.escala_id|stringformat:"i" == i %}
-                                                <!-- MODIFICADO: Agregué display: block y word-break -->
-                                                <span style="font-weight: bold; color: #fff; font-size: 0.88em; display: block; word-break: break-word;">{{ i }}. {{ d.escala.descripcion }}:</span>
-                                                <span style="font-size: 0.85em; display: block; line-height: 1.3; opacity: 0.9; word-break: break-word;">{{ d.descripcion }}</span>
+                                                <span style="font-weight: bold; color: #fff; font-size: 0.88em;">{{ i }}. {{ d.escala.descripcion }}:</span>
+                                                <span style="font-size: 0.85em; display: block; line-height: 1.3; opacity: 0.9;">{{ d.descripcion }}</span>
                                             {% endif %}
                                         {% endfor %}
                                     </label>

@@ -368,28 +368,28 @@ VALUES
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (61, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.1', 1, 1, 2, 2),
-    (62, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.1', 2, 1, 2, 2),
-    (63, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.1', 3, 1, 2, 2),
-    (64, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.1', 4, 1, 2, 2);
+    (61, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.1', 1, 1, 2, 3),
+    (62, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.1', 2, 1, 2, 3),
+    (63, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.1', 3, 1, 2, 3),
+    (64, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.1', 4, 1, 2, 3);
 
 -- ENE2.2
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (65, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.2', 1, 1, 2, 2),
-    (66, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.2', 2, 1, 2, 2),
-    (67, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.2', 3, 1, 2, 2),
-    (68, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.2', 4, 1, 2, 2);
+    (65, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.2', 1, 1, 2, 3),
+    (66, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.2', 2, 1, 2, 3),
+    (67, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.2', 3, 1, 2, 3),
+    (68, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.2', 4, 1, 2, 3);
 
 -- ENE2.3
 INSERT INTO DESCRIPCION_RESPUESTA 
     (ID_DESCRIPCION_RESPUESTA, TITULO, DESCRIPCION, CODIGO_EXCEL, ESCALA_ID_ESCALA, DIMENSION_ID_DIMENSION, COMPETENCIA_ID_COMPETENCIA, NIVEL_JERARQUICO_ID_NIVEL_JERARQUICO) 
 VALUES 
-    (69, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.3', 1, 1, 2, 2),
-    (70, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.3', 2, 1, 2, 2),
-    (71, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.3', 3, 1, 2, 2),
-    (72, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.3', 4, 1, 2, 2);
+    (69, 'No Logra lo Esperado', 'No cumple con los comportamientos y resultados mínimos definidos para la competencia.', 'ENE2.3', 1, 1, 2, 3),
+    (70, 'Logra Parcialmente lo Esperado', 'Cumple solo en forma incompleta o inconsistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.3', 2, 1, 2, 3),
+    (71, 'Logra lo Esperado', 'Cumple de manera consistente con los comportamientos y resultados definidos para la competencia.', 'ENE2.3', 3, 1, 2, 3),
+    (72, 'Supera lo Esperado', 'Supera de forma sostenida los comportamientos y resultados definidos para la competencia, agregando valor más allá de lo requerido.', 'ENE2.3', 4, 1, 2, 3);
 
 -- Competencia: Análisis y Solución de Problemas / Nivel: Operativo
 

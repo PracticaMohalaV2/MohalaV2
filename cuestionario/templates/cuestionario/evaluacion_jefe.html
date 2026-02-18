@@ -5,9 +5,9 @@
 {% block content %}
 <section>
     <header>
-        <p style="margin-bottom: 0.5em;">
+        <p style="font-size: 1.1em; margin-top: -0.5em; margin-bottom: 1.5em; border-bottom: solid 1px rgba(255, 255, 255, 0.125); padding-bottom: 0.5em;">
             Evaluador: <strong>{{ evaluador.nombre }} {{ evaluador.apellido_paterno }} {{ evaluador.apellido_materno }}</strong><br>
-            Colaborador a evaluar: <strong style="color: #51ff85;">{{ evaluado.nombre }} {{ evaluado.apellido_paterno }} {{ evaluado.apellido_materno }}</strong>
+            Evaluando a: <strong style="color: #51ff85;">{{ evaluado.nombre }} {{ evaluado.apellido_paterno }} {{ evaluado.apellido_materno }}</strong>
         </p>
         
         <h2>Evaluación de Desempeño (Jefatura)</h2>

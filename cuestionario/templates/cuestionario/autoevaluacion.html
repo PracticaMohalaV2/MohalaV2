@@ -5,14 +5,14 @@
 {% block content %}
 <section>
     <header>
-        <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button small">← Volver a Dimensiones</a>
-        
-        <p style="margin-top: 1em; margin-bottom: 0.5em;">
+        <p style="font-size: 1.1em; margin-top: -0.5em; margin-bottom: 1.5em; border-bottom: solid 1px rgba(255, 255, 255, 0.125); padding-bottom: 0.5em;">
             <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
-            Nivel: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em>
+            <span style="opacity: 0.7; font-size: 0.9em;">Nivel: {{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</span>
         </p>
         
-        <h2>Mi Autoevaluación de Desempeño</h2>
+        <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button small">← Volver a Dimensiones</a>
+        
+        <h2 style="margin-top: 1em;">Mi Autoevaluación de Desempeño</h2>
         
         <h3 style="color: {% if dimension == 'Organizacional' %}#51ff85{% else %}#2196F3{% endif %};">
             Dimensión: {{ dimension }}

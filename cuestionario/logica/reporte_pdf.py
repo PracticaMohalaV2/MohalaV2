@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.utils import timezone
 from cuestionario.models import Trabajador, Autoevaluacion, EvaluacionJefatura, ResultadoConsolidado
 from reportlab.lib.pagesizes import A4
 from reportlab.lib import colors
@@ -9,6 +10,7 @@ from reportlab.lib.units import inch
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.enums import TA_CENTER
 from io import BytesIO
+import pytz  
 
 
 @login_required
@@ -32,8 +34,26 @@ def generar_pdf_detalle(request, trabajador_id):
     auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True).first()
     jefe = EvaluacionJefatura.objects.filter(trabajador_evaluado=trabajador, estado_finalizacion=True).first()
     
-    timestamp_auto = auto.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if auto else "Pendiente"
-    timestamp_jefe = jefe.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if jefe else "N/A"
+    # Convertir a zona horaria de Chile
+    chile_tz = pytz.timezone('America/Santiago')
+    
+    if auto:
+        timestamp_auto_utc = auto.momento_evaluacion
+        if timezone.is_aware(timestamp_auto_utc):
+            timestamp_auto = timestamp_auto_utc.astimezone(chile_tz).strftime("%d/%m/%Y %H:%M")
+        else:
+            timestamp_auto = timestamp_auto_utc.strftime("%d/%m/%Y %H:%M")
+    else:
+        timestamp_auto = "Pendiente"
+    
+    if jefe:
+        timestamp_jefe_utc = jefe.momento_evaluacion
+        if timezone.is_aware(timestamp_jefe_utc):
+            timestamp_jefe = timestamp_jefe_utc.astimezone(chile_tz).strftime("%d/%m/%Y %H:%M")
+        else:
+            timestamp_jefe = timestamp_jefe_utc.strftime("%d/%m/%Y %H:%M")
+    else:
+        timestamp_jefe = "N/A"
     
     # Crear el PDF
     buffer = BytesIO()

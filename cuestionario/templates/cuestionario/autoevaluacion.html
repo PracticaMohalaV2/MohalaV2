@@ -46,9 +46,9 @@
                                            name="puntaje_{{ p.id_textos_evaluacion }}" 
                                            value="{{ i }}" 
                                            required
-                                           style="margin-top: 4px; transform: scale(0.6);">
+                                           style="margin-top: 4px; transform: scale(0.6); flex-shrink: 0;">
                                     
-                                    <label for="radio_{{ p.id_textos_evaluacion }}_{{ i }}" style="margin-bottom: 0; cursor: pointer; flex: 1;">
+                                    <label for="radio_{{ p.id_textos_evaluacion }}_{{ i }}" style="margin-bottom: 0; cursor: pointer; flex: 1; word-wrap: break-word; white-space: normal; overflow-wrap: break-word;">
                                         {% for d in descripciones %}
                                             {% if d.codigo_excel_id == p.codigo_excel and d.escala_id|stringformat:"i" == i %}
                                                 <span style="font-weight: bold; color: #fff; font-size: 0.88em;">{{ i }}. {{ d.escala.descripcion }}:</span>

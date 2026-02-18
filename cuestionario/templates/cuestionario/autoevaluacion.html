@@ -7,12 +7,16 @@
     <header>
         <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button small">← Volver a Dimensiones</a>
         
-        <h2 style="margin-top: 1em;">Mi Autoevaluación de Desempeño</h2>
+        <p style="margin-top: 1em; margin-bottom: 0.5em;">
+            <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
+            Nivel: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em>
+        </p>
+        
+        <h2>Mi Autoevaluación de Desempeño</h2>
+        
         <h3 style="color: {% if dimension == 'Organizacional' %}#51ff85{% else %}#2196F3{% endif %};">
             Dimensión: {{ dimension }}
         </h3>
-        <p>Registrando respuestas para: <strong>{{ trabajador.nombre }} {{ trabajador.apellido_paterno }} {{ trabajador.apellido_materno }}</strong><br>
-        Nivel: <em>{{ trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</em></p>
     </header>
 
     <form method="POST" onsubmit="this.btnSubmit.disabled=true; this.btnSubmit.innerText='Guardando...'; return true;">

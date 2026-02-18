@@ -5,12 +5,15 @@
 {% block content %}
 <section>
     <header>
+        <p style="margin-bottom: 0.5em;">
+            Evaluador: <strong>{{ evaluador.nombre }} {{ evaluador.apellido_paterno }} {{ evaluador.apellido_materno }}</strong><br>
+            Colaborador a evaluar: <strong style="color: #51ff85;">{{ evaluado.nombre }} {{ evaluado.apellido_paterno }} {{ evaluado.apellido_materno }}</strong>
+        </p>
+        
         <h2>Evaluación de Desempeño (Jefatura)</h2>
         <h3 style="color: {% if dimension == 'Organizacional' %}#51ff85{% else %}#2196F3{% endif %};">
             Dimensión: {{ dimension }}
         </h3>
-        <p>Evaluador: <strong>{{ evaluador.nombre }} {{ evaluador.apellido_paterno }} {{ evaluador.apellido_materno }}</strong><br>
-        Colaborador a evaluar: <strong style="color: #51ff85;">{{ evaluado.nombre }} {{ evaluado.apellido_paterno }} {{ evaluado.apellido_materno }}</strong></p>
     </header>
 
     <form method="POST" onsubmit="this.btnSubmit.disabled=true; this.btnSubmit.innerText='Guardando...'; return true;">

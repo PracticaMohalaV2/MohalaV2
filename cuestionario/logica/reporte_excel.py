@@ -64,7 +64,7 @@ def generar_excel_detalle(request, trabajador_id):
     info_data = [
         ['Colaborador:', f"{trabajador.nombre} {trabajador.apellido_paterno} {trabajador.apellido_materno}"],
         ['Cargo:', trabajador.cargo.nombre_cargo],
-        ['Nivel Jerárquico:', trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
+        ['Nivel:', trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
         ['Jefatura Directa:', f"{trabajador.id_jefe_directo.nombre} {trabajador.id_jefe_directo.apellido_paterno} {trabajador.id_jefe_directo.apellido_materno}" if trabajador.id_jefe_directo else "N/A"],
         ['Autoevaluación finalizada:', timestamp_auto],
         ['Evaluación Jefatura finalizada:', timestamp_jefe]

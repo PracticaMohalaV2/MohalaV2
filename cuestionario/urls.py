@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from . import logica as views
-from .logica import validador_login, seguimiento, detalle_seguimiento, reporte_pdf
+from .logica import validador_login, seguimiento, detalle_seguimiento, reporte_pdf, reporte_excel
 
 urlpatterns = [
     path('login/', validador_login.login_view, name='login'),
@@ -19,6 +19,10 @@ urlpatterns = [
     path('seguimiento/detalle/<int:trabajador_id>/pdf/', 
          reporte_pdf.generar_pdf_detalle, 
          name='generar_pdf_detalle'),
+    
+    path('seguimiento/detalle/<int:trabajador_id>/excel/', 
+         reporte_excel.generar_excel_detalle, 
+         name='generar_excel_detalle'),
     
     path('autoevaluacion/<int:trabajador_id>/', 
          views.cuestionario_autoevaluacion, 

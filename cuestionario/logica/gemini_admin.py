@@ -69,11 +69,11 @@ def generar_informe_gemini(request, prompt_id):
     try:
         prompt_obj = PromptGemini.objects.get(id_prompt=prompt_id)
     except PromptGemini.DoesNotExist:
-        return redirect('panel_gemini')
+        return HttpResponse("Prompt no encontrado", status=404)
     
     try:
-        # Configurar el modelo Gemini 1.5 Flash (estable y gratuito)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # MODIFICADO: Usar models/gemini-2.0-flash (disponible en tu API key)
+        model = genai.GenerativeModel('models/gemini-2.0-flash')
         
         # Generar respuesta
         response = model.generate_content(prompt_obj.prompt_texto)
@@ -164,7 +164,51 @@ def generar_informe_gemini(request, prompt_id):
         return response_http
         
     except Exception as e:
-        # En caso de error, guardar el error en la BD
-        prompt_obj.respuesta_gemini = f"ERROR: {str(e)}"
+        # Mostrar el error
+        error_msg = f"ERROR al generar informe: {str(e)}"
+        print(error_msg)
+        
+        # Guardar error en BD
+        prompt_obj.respuesta_gemini = error_msg
         prompt_obj.save()
-        return redirect('panel_gemini')
+        
+        # Devolver error como HTML
+        return HttpResponse(f"""
+            <html>
+            <body style="font-family: Arial; padding: 40px;">
+                <h1 style="color: #ff5151;">Error al generar PDF</h1>
+                <p><strong>Detalles del error:</strong></p>
+                <pre style="background: #f0f0f0; padding: 20px; border-radius: 5px;">{error_msg}</pre>
+                <br>
+                <a href="/gemini/" style="background: #5e42a6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Volver al Panel Gemini</a>
+            </body>
+            </html>
+        """, status=500)
+
+
+@login_required
+def listar_modelos(request):
+    """Listar modelos disponibles en tu API key"""
+    if not request.user.is_superuser:
+        return redirect('index')
+    
+    try:
+        modelos = []
+        for m in genai.list_models():
+            if 'generateContent' in m.supported_generation_methods:
+                modelos.append(m.name)
+        
+        return HttpResponse(f"""
+            <html>
+            <body style="font-family: Arial; padding: 40px;">
+                <h1>Modelos disponibles con tu API key:</h1>
+                <ul>
+                    {''.join([f'<li>{m}</li>' for m in modelos])}
+                </ul>
+                <br>
+                <a href="/gemini/">Volver</a>
+            </body>
+            </html>
+        """)
+    except Exception as e:
+        return HttpResponse(f"Error: {str(e)}")

@@ -227,6 +227,17 @@ CREATE TABLE RESULTADO_CONSOLIDADO (
     CONSTRAINT UNQ_RES_TRAB_PREG_PERIODO UNIQUE (TRABAJADOR_ID_TRABAJADOR, CODIGO_EXCEL, PERIODO)
 );
 
+-- =========================
+-- Gemini
+-- =========================
+CREATE TABLE PROMPT_GEMINI (
+    id_prompt INT AUTO_INCREMENT PRIMARY KEY,
+    prompt_texto TEXT NOT NULL,
+    timestamp DATETIME(6) NOT NULL,
+    respuesta_gemini TEXT NULL,
+    pdf_generado TINYINT(1) NOT NULL DEFAULT 0
+);
+
 -- Forzar lectura correcta
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 1;

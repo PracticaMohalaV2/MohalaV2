@@ -5,7 +5,7 @@ from .models import (
     Dimension, Departamento, NivelJerarquico, Cargo, Trabajador, 
     Competencia, TextosEvaluacion, Autoevaluacion, 
     EvaluacionJefatura, ResultadoConsolidado, Escala,
-    DescripcionRespuesta
+    DescripcionRespuesta, PromptGemini
 )
 
 # --- Configuración Estética ---
@@ -120,6 +120,18 @@ class DescripcionRespuestaAdmin(admin.ModelAdmin):
         if obj.descripcion and len(obj.descripcion) > 50:
             return obj.descripcion[:50] + "..."
         return obj.descripcion
+
+@admin.register(PromptGemini)
+class PromptGeminiAdmin(admin.ModelAdmin):
+    list_display = ('id_prompt', 'get_prompt_corto', 'timestamp', 'pdf_generado')
+    list_filter = ('pdf_generado', 'timestamp')
+    search_fields = ('prompt_texto', 'respuesta_gemini')
+    ordering = ('-timestamp',)
+    readonly_fields = ('timestamp',)
+
+    @admin.display(description='Prompt')
+    def get_prompt_corto(self, obj):
+        return (obj.prompt_texto[:80] + '...') if len(obj.prompt_texto) > 80 else obj.prompt_texto
 
 # Registros simples
 admin.site.register(Dimension)

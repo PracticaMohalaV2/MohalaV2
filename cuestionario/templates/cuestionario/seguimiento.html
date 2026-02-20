@@ -4,12 +4,6 @@
 <section>
     <header>
         <h2>Seguimiento</h2>
-        
-        {% if user.is_superuser %}
-        <a href="{% url 'panel_gemini' %}" class="button primary" style="margin-top: 1em;">
-            🤖 Panel IA Gemini
-        </a>
-        {% endif %}
     </header>
 
     <div class="row">
@@ -82,6 +76,9 @@
 
     <ul class="actions">
         <li><a href="{% url 'index' %}" class="button">Volver al Panel</a></li>
+        {% if user.is_superuser %}
+        <li><a href="{% url 'panel_gemini' %}" class="button primary">🤖 Panel IA Gemini</a></li>
+        {% endif %}
     </ul>
 </section>
 {% endblock %}

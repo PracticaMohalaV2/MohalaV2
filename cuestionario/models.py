@@ -358,3 +358,20 @@ def crear_usuario_automatico(sender, instance, created, **kwargs):
         )
         instance.user = nuevo_user
         instance.save()
+
+# ==========================================================
+# Gemini
+# ==========================================================
+class PromptGemini(models.Model):
+    id_prompt = models.AutoField(primary_key=True)
+    prompt_texto = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    respuesta_gemini = models.TextField(blank=True, null=True)
+    pdf_generado = models.BooleanField(default=False)
+    
+    class Meta:
+        db_table = 'PROMPT_GEMINI'
+        ordering = ['-timestamp']
+    
+    def __str__(self):
+        return f"Prompt {self.id_prompt} - {self.timestamp.strftime('%d/%m/%Y %H:%M')}"

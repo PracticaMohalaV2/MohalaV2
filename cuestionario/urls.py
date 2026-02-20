@@ -1,13 +1,11 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from . import logica as views
-from .logica import validador_login, seguimiento, detalle_seguimiento, reporte_pdf, reporte_excel
+from .logica import validador_login, seguimiento, detalle_seguimiento, reporte_pdf, reporte_excel, gemini_admin
 
 urlpatterns = [
     path('login/', validador_login.login_view, name='login'),
-    
     path('logout/', LogoutView.as_view(next_page='login'), name='logout'),
-
     path('', views.index, name='index'),
     
     path('seguimiento/', seguimiento.panel_seguimiento, name='seguimiento_admin'),
@@ -23,6 +21,10 @@ urlpatterns = [
     path('seguimiento/detalle/<int:trabajador_id>/excel/', 
          reporte_excel.generar_excel_detalle, 
          name='generar_excel_detalle'),
+    
+    path('gemini/', gemini_admin.panel_gemini, name='panel_gemini'),
+    path('gemini/editar-prompt/', gemini_admin.editar_prompt, name='editar_prompt'),
+    path('gemini/generar/<int:prompt_id>/', gemini_admin.generar_informe_gemini, name='generar_informe_gemini'),
     
     path('autoevaluacion/<int:trabajador_id>/', 
          views.cuestionario_autoevaluacion, 

@@ -4,6 +4,12 @@
 <section>
     <header>
         <h2>Seguimiento</h2>
+        
+        {% if user.is_superuser %}
+        <a href="{% url 'panel_gemini' %}" class="button primary" style="margin-top: 1em;">
+            🤖 Panel IA Gemini
+        </a>
+        {% endif %}
     </header>
 
     <div class="row">
@@ -36,7 +42,8 @@
                     <td>
                         <strong>{{ t.nombre }} {{ t.apellido_paterno }} {{ t.apellido_materno }}</strong><br>
                         <small>{{ t.cargo.nombre_cargo }}</small>
-                    </td> <td style="text-align: center;">
+                    </td>
+                    <td style="text-align: center;">
                         <strong>{{ t.nivel_jerarquico }}</strong><br>
                     </td>
                     

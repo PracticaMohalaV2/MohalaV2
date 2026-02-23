@@ -73,7 +73,7 @@ def generar_informe_gemini(request, prompt_id):
     
     try:
         # MODIFICADO: Usar models/gemini-2.0-flash (disponible en tu API key)
-        model = genai.GenerativeModel('models/gemini-2.0-flash')
+        model = genai.GenerativeModel('models/gemini-2.5-flash')
         
         # Generar respuesta
         response = model.generate_content(prompt_obj.prompt_texto)

@@ -360,18 +360,44 @@ def crear_usuario_automatico(sender, instance, created, **kwargs):
         instance.save()
 
 # ==========================================================
+# Reporte Global
+# ==========================================================
+class ReporteGlobal(models.Model):
+    id_reporte_global = models.AutoField(primary_key=True)
+    contenido_pdf = models.BinaryField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    total_trabajadores = models.IntegerField(default=0)
+    periodo = models.IntegerField()
+
+    class Meta:
+        db_table = 'REPORTE_GLOBAL'
+
+    def __str__(self):
+        return f"Reporte Global {self.id_reporte_global} - Periodo {self.periodo}"
+
+
+# ==========================================================
 # Gemini
 # ==========================================================
 class PromptGemini(models.Model):
     id_prompt = models.AutoField(primary_key=True)
     prompt_texto = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    respuesta_gemini = models.TextField(blank=True, null=True)
+    respuesta_gemini = models.TextField(null=True, blank=True)
     pdf_generado = models.BooleanField(default=False)
+    archivo_pdf = models.BinaryField(null=True, blank=True)
     
+    reporte_global = models.ForeignKey(
+        ReporteGlobal,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        db_column='REPORTE_GLOBAL_ID'
+    )
+
     class Meta:
         db_table = 'PROMPT_GEMINI'
         ordering = ['-timestamp']
-    
+
     def __str__(self):
-        return f"Prompt {self.id_prompt} - {self.timestamp.strftime('%d/%m/%Y %H:%M')}"
+        return f"Prompt {self.id_prompt} - {self.timestamp.strftime('%d/%m/%Y')}"

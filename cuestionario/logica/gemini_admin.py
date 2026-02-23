@@ -72,7 +72,7 @@ def generar_informe_gemini(request, prompt_id):
         return HttpResponse("Prompt no encontrado", status=404)
     
     try:
-        # MODIFICADO: Usar models/gemini-2.0-flash (disponible en tu API key)
+        # Usar gemini-2.5-flash (capa gratuita)
         model = genai.GenerativeModel('models/gemini-2.5-flash')
         
         # Generar respuesta
@@ -129,27 +129,38 @@ def generar_informe_gemini(request, prompt_id):
         
         # Prompt usado
         elements.append(Paragraph("Prompt Utilizado", subtitle_style))
-        elements.append(Paragraph(prompt_obj.prompt_texto, body_style))
+        
+        # MODIFICADO: Escapar caracteres especiales en el prompt
+        prompt_escapado = prompt_obj.prompt_texto.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+        elements.append(Paragraph(prompt_escapado, body_style))
         elements.append(Spacer(1, 0.3*inch))
         
         # Respuesta de Gemini
         elements.append(Paragraph("Informe Generado", title_style))
         elements.append(Spacer(1, 0.1*inch))
         
-        # Procesar la respuesta (limpiar markdown básico)
+        # MODIFICADO: Procesar la respuesta con manejo de caracteres especiales
         lineas = respuesta_texto.split('\n')
         for linea in lineas:
             if linea.strip():
+                # Escapar caracteres especiales HTML
+                linea = linea.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+                
                 # Limpiar markdown
                 linea_limpia = linea.replace('**', '<b>').replace('**', '</b>')
                 linea_limpia = linea_limpia.replace('*', '<i>').replace('*', '</i>')
                 linea_limpia = linea_limpia.replace('#', '')
                 
-                # Detectar si es un título (empieza con ##)
-                if linea.strip().startswith('##'):
-                    elements.append(Paragraph(linea_limpia.strip(), subtitle_style))
-                else:
-                    elements.append(Paragraph(linea_limpia, body_style))
+                try:
+                    # Detectar si es un título (empieza con ##)
+                    if linea.strip().startswith('##'):
+                        elements.append(Paragraph(linea_limpia.strip(), subtitle_style))
+                    else:
+                        elements.append(Paragraph(linea_limpia, body_style))
+                except Exception as e:
+                    # Si falla, agregar como texto plano simple
+                    print(f"Error procesando línea: {str(e)}")
+                    continue
         
         # Construir PDF
         doc.build(elements)

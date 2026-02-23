@@ -78,6 +78,15 @@
         <li><a href="{% url 'index' %}" class="button">Volver al Panel</a></li>
         {% if user.is_superuser %}
         <li><a href="{% url 'panel_gemini' %}" class="button primary">🤖 Panel IA Gemini</a></li>
+        
+        <li>
+            <a href="{% url 'generar_reporte_global' %}" 
+               class="button primary" 
+               target="_blank" 
+               style="background-color: #2196F3; border-color: #2196F3;">
+               📊 Generar Reporte Global PDF
+            </a>
+        </li>
         {% endif %}
     </ul>
 </section>

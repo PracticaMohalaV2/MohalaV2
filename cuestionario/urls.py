@@ -27,6 +27,7 @@ urlpatterns = [
     path('gemini/editar-prompt/', gemini_admin.editar_prompt, name='editar_prompt'),
     path('gemini/generar/<int:prompt_id>/', gemini_admin.generar_informe_gemini, name='generar_informe_gemini'),
     path('gemini/listar-modelos/', gemini_admin.listar_modelos, name='listar_modelos'),
+    path('gemini/ver-informe/<int:prompt_id>/', gemini_admin.ver_informe_gemini, name='ver_informe_gemini'),
     
     path('autoevaluacion/<int:trabajador_id>/', 
          views.cuestionario_autoevaluacion, 

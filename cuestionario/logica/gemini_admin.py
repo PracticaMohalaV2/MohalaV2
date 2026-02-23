@@ -223,3 +223,114 @@ def listar_modelos(request):
         """)
     except Exception as e:
         return HttpResponse(f"Error: {str(e)}")
+    
+@login_required
+def ver_informe_gemini(request, prompt_id):
+    """Ver el informe generado por Gemini en HTML"""
+    if not request.user.is_superuser:
+        return redirect('index')
+    
+    try:
+        prompt_obj = PromptGemini.objects.get(id_prompt=prompt_id)
+    except PromptGemini.DoesNotExist:
+        return HttpResponse("Prompt no encontrado", status=404)
+    
+    if not prompt_obj.respuesta_gemini:
+        return HttpResponse("Este prompt aún no tiene informe generado", status=404)
+    
+    # Convertir markdown básico a HTML
+    contenido = prompt_obj.respuesta_gemini
+    contenido = contenido.replace('**', '<strong>').replace('**', '</strong>')
+    contenido = contenido.replace('*', '<em>').replace('*', '</em>')
+    contenido = contenido.replace('\n', '<br>')
+    
+    return HttpResponse(f"""
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    max-width: 900px;
+                    margin: 40px auto;
+                    padding: 20px;
+                    line-height: 1.6;
+                    background: #f5f5f5;
+                }}
+                .container {{
+                    background: white;
+                    padding: 40px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }}
+                .header {{
+                    border-bottom: 3px solid #5e42a6;
+                    padding-bottom: 20px;
+                    margin-bottom: 30px;
+                }}
+                h1 {{
+                    color: #5e42a6;
+                    margin: 0;
+                }}
+                .meta {{
+                    color: #666;
+                    font-size: 0.9em;
+                    margin-top: 10px;
+                }}
+                .prompt {{
+                    background: #f0f0f0;
+                    padding: 15px;
+                    border-radius: 5px;
+                    margin-bottom: 30px;
+                }}
+                .content {{
+                    color: #333;
+                }}
+                .actions {{
+                    margin-top: 30px;
+                    padding-top: 20px;
+                    border-top: 1px solid #ddd;
+                }}
+                a {{
+                    color: #5e42a6;
+                    text-decoration: none;
+                    padding: 10px 20px;
+                    background: #5e42a6;
+                    color: white;
+                    border-radius: 5px;
+                    display: inline-block;
+                    margin-right: 10px;
+                }}
+                a:hover {{
+                    background: #4a3285;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Informe Generado por Gemini AI</h1>
+                    <div class="meta">
+                        Prompt ID: #{prompt_obj.id_prompt} | 
+                        Fecha: {prompt_obj.timestamp.strftime("%d/%m/%Y %H:%M")}
+                    </div>
+                </div>
+                
+                <div class="prompt">
+                    <strong>Prompt utilizado:</strong><br>
+                    {prompt_obj.prompt_texto}
+                </div>
+                
+                <div class="content">
+                    <h2>Informe:</h2>
+                    {contenido}
+                </div>
+                
+                <div class="actions">
+                    <a href="/gemini/">← Volver al Panel</a>
+                    <a href="/gemini/generar/{prompt_obj.id_prompt}/" target="_blank">📄 Generar PDF</a>
+                </div>
+            </div>
+        </body>
+        </html>
+    """)

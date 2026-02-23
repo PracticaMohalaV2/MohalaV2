@@ -9,7 +9,7 @@ def index(request):
         context = {
             'es_admin_sistema': True,
             'nombre_usuario': request.user.username,
-            'trabajador': None, # Evitamos confusiones
+            'trabajador': None,
             'es_jefe': False,
             'equipo': [],
             'ya_hizo_autoevaluacion': False,

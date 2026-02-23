@@ -10,7 +10,7 @@ def generar_consolidado(trabajador, periodo=None):
     respuestas_auto = Autoevaluacion.objects.filter(trabajador=trabajador, estado_finalizacion=True)
     
     if not respuestas_auto.exists():
-        return # No hay nada que consolidar aún
+        return
 
     # 2. Verificar si el trabajador tiene un jefe asignado
     tiene_jefe = trabajador.id_jefe_directo is not None

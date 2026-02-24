@@ -19,9 +19,6 @@ def generar_reporte_global_pdf(request):
     if not request.user.is_superuser:
         return redirect('index')
 
-    # ✅ FIX 1: 'resultadoconsolidado' es el related_name que Django genera
-    # automáticamente desde el modelo ResultadoConsolidado (sin related_name definido).
-    # Tu versión anterior usaba 'resultados_consolidados__isnull=False' → no existe → falla.
     trabajadores = Trabajador.objects.filter(
         resultadoconsolidado__isnull=False
     ).select_related(
@@ -37,14 +34,6 @@ def generar_reporte_global_pdf(request):
     doc = SimpleDocTemplate(buffer, pagesize=A4)
     elements = []
 
-    # ------------------------------------------------------------------
-    # Estilos — misma lógica que reporte_pdf.py (que sí funciona),
-    # pero con nombres de estilo prefijados con 'Global' para evitar
-    # colisiones con el stylesheet de reporte_pdf.py en la misma sesión.
-    # ✅ FIX 2: func_heading_style definido UNA SOLA VEZ fuera del loop.
-    #    En tu versión anterior se redefinía en cada iteración →
-    #    ReportLab lanzaba ValueError: "style already registered" en el 2° trabajador.
-    # ------------------------------------------------------------------
     styles = getSampleStyleSheet()
 
     title_style = ParagraphStyle(
@@ -71,7 +60,7 @@ def generar_reporte_global_pdf(request):
         spaceAfter=12,
         spaceBefore=20
     )
-    func_heading_style = ParagraphStyle(      # ← fuera del loop, definido una sola vez
+    func_heading_style = ParagraphStyle(
         'GlobalFuncHeading',
         parent=styles['Heading2'],
         fontSize=14,
@@ -79,21 +68,39 @@ def generar_reporte_global_pdf(request):
         spaceAfter=12,
         spaceBefore=20
     )
+    comp_style = ParagraphStyle(
+        'GlobalCompStyle',
+        parent=styles['Normal'],
+        fontSize=9,
+        textColor=colors.HexColor('#5e42a6'),
+        fontName='Helvetica-Bold',
+        spaceAfter=2,
+    )
+    comp_func_style = ParagraphStyle(
+        'GlobalCompFuncStyle',
+        parent=styles['Normal'],
+        fontSize=9,
+        textColor=colors.HexColor('#2196F3'),
+        fontName='Helvetica-Bold',
+        spaceAfter=2,
+    )
+    indicator_style = ParagraphStyle(
+        'GlobalIndicatorStyle',
+        parent=styles['Normal'],
+        fontSize=7,
+        textColor=colors.HexColor('#555555'),
+        leading=9,
+    )
 
-    # ------------------------------------------------------------------
     # PORTADA
-    # ------------------------------------------------------------------
     elements.append(Spacer(1, 2 * inch))
-    elements.append(Paragraph("REPORTE GLOBAL DE EVALUACIONES DE DESEMPEÑO", portada_style))
+    elements.append(Paragraph("REPORTE GLOBAL DE EVALUACIONES DE DESEMPENO", portada_style))
     elements.append(Spacer(1, 0.5 * inch))
     elements.append(Paragraph(f"Total de Colaboradores: {trabajadores.count()}", title_style))
-    elements.append(Paragraph(f"Fecha de Generación: {datetime.now().strftime('%d/%m/%Y %H:%M')}", title_style))
+    elements.append(Paragraph(f"Fecha de Generacion: {datetime.now().strftime('%d/%m/%Y %H:%M')}", title_style))
     elements.append(Paragraph("Periodo: 2026", title_style))
     elements.append(PageBreak())
 
-    # ------------------------------------------------------------------
-    # Reporte por trabajador — misma lógica que reporte_pdf.py
-    # ------------------------------------------------------------------
     total = trabajadores.count()
 
     for idx, trabajador in enumerate(trabajadores, 1):
@@ -124,13 +131,11 @@ def generar_reporte_global_pdf(request):
         timestamp_auto = auto.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if auto else "Pendiente"
         timestamp_jefe = jefe.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if jefe else "N/A"
 
-        # Título del trabajador
         elements.append(
-            Paragraph(f"Reporte de Evaluación de Desempeño — #{idx} de {total}", title_style)
+            Paragraph(f"Reporte de Evaluacion de Desempeno - #{idx} de {total}", title_style)
         )
         elements.append(Spacer(1, 0.2 * inch))
 
-        # Tabla de información del trabajador
         jefe_directo_nombre = (
             f"{trabajador.id_jefe_directo.nombre} "
             f"{trabajador.id_jefe_directo.apellido_paterno} "
@@ -139,12 +144,12 @@ def generar_reporte_global_pdf(request):
         )
 
         info_data = [
-            ['Colaborador:',             f"{trabajador.nombre} {trabajador.apellido_paterno} {trabajador.apellido_materno}"],
-            ['Cargo:',                   trabajador.cargo.nombre_cargo],
-            ['Nivel:',                   trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
-            ['Jefatura Directa:',        jefe_directo_nombre],
-            ['Autoevaluación finalizada:',      timestamp_auto],
-            ['Evaluación Jefatura finalizada:', timestamp_jefe],
+            ['Colaborador:',                    f"{trabajador.nombre} {trabajador.apellido_paterno} {trabajador.apellido_materno}"],
+            ['Cargo:',                          trabajador.cargo.nombre_cargo],
+            ['Nivel:',                          trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
+            ['Jefatura Directa:',               jefe_directo_nombre],
+            ['Autoevaluacion finalizada:',      timestamp_auto],
+            ['Evaluacion Jefatura finalizada:', timestamp_jefe],
         ]
 
         info_table = Table(info_data, colWidths=[2.5 * inch, 4 * inch])
@@ -161,25 +166,31 @@ def generar_reporte_global_pdf(request):
         elements.append(info_table)
         elements.append(Spacer(1, 0.3 * inch))
 
-        # ---- Tabla Organizacional ----
-        elements.append(Paragraph("Dimensión: Organizacional", heading_style))
+        # Tabla Organizacional
+        elements.append(Paragraph("Dimension: Organizacional", heading_style))
 
-        org_data = [['Código', 'Competencia', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
+        org_data = [['Codigo', 'Competencia / Indicador', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
         for r in resultados_organizacionales:
+            celda = [
+                Paragraph(r.competencia.nombre_competencia, comp_style),
+                Paragraph(r.codigo_excel.texto, indicator_style),
+            ]
             org_data.append([
                 r.codigo_excel.codigo_excel,
-                r.competencia.nombre_competencia,
+                celda,
                 str(r.puntaje_autoev),
                 str(r.puntaje_jefe) if r.puntaje_jefe > 0 else 'N/A',
                 f"{'+' if r.diferencia > 0 else ''}{int(r.diferencia)}",
             ])
 
-        org_table = Table(org_data, colWidths=[0.8 * inch, 2.5 * inch, 0.8 * inch, 0.8 * inch, 1 * inch])
+        org_table = Table(org_data, colWidths=[0.7 * inch, 3.2 * inch, 0.7 * inch, 0.7 * inch, 0.8 * inch])
         org_table.setStyle(TableStyle([
             ('BACKGROUND',    (0, 0), (-1, 0),  colors.HexColor('#5e42a6')),
             ('TEXTCOLOR',     (0, 0), (-1, 0),  colors.white),
             ('ALIGN',         (0, 0), (-1, -1), 'CENTER'),
-            ('ALIGN',         (1, 1), (1, -1),  'LEFT'),
+            ('ALIGN',         (1, 0), (1, -1),  'LEFT'),
+            ('VALIGN',        (0, 0), (-1, -1), 'MIDDLE'),
+            ('VALIGN',        (1, 1), (1, -1),  'TOP'),
             ('FONTNAME',      (0, 0), (-1, 0),  'Helvetica-Bold'),
             ('FONTSIZE',      (0, 0), (-1, 0),  10),
             ('FONTSIZE',      (0, 1), (-1, -1), 9),
@@ -190,25 +201,31 @@ def generar_reporte_global_pdf(request):
         elements.append(org_table)
         elements.append(Spacer(1, 0.3 * inch))
 
-        # ---- Tabla Funcional ----
-        elements.append(Paragraph("Dimensión: Funcional", func_heading_style))
+        # Tabla Funcional
+        elements.append(Paragraph("Dimension: Funcional", func_heading_style))
 
-        func_data = [['Código', 'Competencia', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
+        func_data = [['Codigo', 'Competencia / Indicador', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
         for r in resultados_funcionales:
+            celda = [
+                Paragraph(r.competencia.nombre_competencia, comp_func_style),
+                Paragraph(r.codigo_excel.texto, indicator_style),
+            ]
             func_data.append([
                 r.codigo_excel.codigo_excel,
-                r.competencia.nombre_competencia,
+                celda,
                 str(r.puntaje_autoev),
                 str(r.puntaje_jefe) if r.puntaje_jefe > 0 else 'N/A',
                 f"{'+' if r.diferencia > 0 else ''}{int(r.diferencia)}",
             ])
 
-        func_table = Table(func_data, colWidths=[0.8 * inch, 2.5 * inch, 0.8 * inch, 0.8 * inch, 1 * inch])
+        func_table = Table(func_data, colWidths=[0.7 * inch, 3.2 * inch, 0.7 * inch, 0.7 * inch, 0.8 * inch])
         func_table.setStyle(TableStyle([
             ('BACKGROUND',    (0, 0), (-1, 0),  colors.HexColor('#5e42a6')),
             ('TEXTCOLOR',     (0, 0), (-1, 0),  colors.white),
             ('ALIGN',         (0, 0), (-1, -1), 'CENTER'),
-            ('ALIGN',         (1, 1), (1, -1),  'LEFT'),
+            ('ALIGN',         (1, 0), (1, -1),  'LEFT'),
+            ('VALIGN',        (0, 0), (-1, -1), 'MIDDLE'),
+            ('VALIGN',        (1, 1), (1, -1),  'TOP'),
             ('FONTNAME',      (0, 0), (-1, 0),  'Helvetica-Bold'),
             ('FONTSIZE',      (0, 0), (-1, 0),  10),
             ('FONTSIZE',      (0, 1), (-1, -1), 9),
@@ -218,18 +235,13 @@ def generar_reporte_global_pdf(request):
         ]))
         elements.append(func_table)
 
-        # Salto de página entre trabajadores (no después del último)
         if idx < total:
             elements.append(PageBreak())
 
-    # ------------------------------------------------------------------
-    # Construir PDF
-    # ------------------------------------------------------------------
     doc.build(elements)
     pdf_bytes = buffer.getvalue()
     buffer.close()
 
-    # Guardar registro en BD
     reporte_global = ReporteGlobal.objects.create(
         contenido_pdf=pdf_bytes,
         total_trabajadores=total,

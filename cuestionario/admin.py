@@ -61,7 +61,7 @@ class TextosEvaluacionAdmin(admin.ModelAdmin):
 
     @admin.display(description='Pregunta')
     def get_texto_corto(self, obj):
-        return (obj.texto[:60] + '...') if len(obj.texto) > 60 else obj.texto
+        return obj.texto
 
 @admin.register(Autoevaluacion)
 class AutoevaluacionAdmin(admin.ModelAdmin):

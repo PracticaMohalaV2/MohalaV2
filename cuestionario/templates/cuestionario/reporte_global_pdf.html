@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Global de Evaluaciones</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .portada {
+            text-align: center;
+            margin-top: 5cm;
+            page-break-after: always;
+        }
+        .portada h1 {
+            color: #5e42a6;
+            font-size: 32px;
+            margin-bottom: 2cm;
+        }
+        .portada p {
+            font-size: 18px;
+            margin: 0.5cm 0;
+        }
+        .trabajador {
+            page-break-before: always;
+        }
+        .trabajador:first-of-type {
+            page-break-before: auto;
+        }
+        h1 {
+            color: #5e42a6;
+            border-bottom: 3px solid #5e42a6;
+            padding-bottom: 10px;
+            font-size: 20px;
+        }
+        h2 {
+            color: #51ff85;
+            margin-top: 30px;
+            font-size: 16px;
+        }
+        h2.funcional {
+            color: #2196F3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 10px;
+        }
+        th {
+            background-color: #5e42a6;
+            color: white;
+        }
+        .positivo {
+            background-color: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+        .negativo {
+            background-color: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+        .neutro {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .header-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 11px;
+        }
+        .header-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- PORTADA -->
+    <div class="portada">
+        <h1>REPORTE GLOBAL DE EVALUACIONES DE DESEMPEÑO</h1>
+        <p><strong>Total de Colaboradores:</strong> {{ total_trabajadores }}</p>
+        <p><strong>Fecha de Generación:</strong> {{ fecha_generacion|date:"d/m/Y H:i" }}</p>
+        <p><strong>Periodo:</strong> 2026</p>
+    </div>
+
+    <!-- REPORTES INDIVIDUALES -->
+    {% for data in trabajadores_data %}
+    <div class="trabajador">
+        <h1>Reporte de Evaluación de Desempeño - {{ data.trabajador.nombre }} {{ data.trabajador.apellido_paterno }}</h1>
+        
+        <div class="header-info">
+            <p><strong>Colaborador:</strong> {{ data.trabajador.nombre }} {{ data.trabajador.apellido_paterno }} {{ data.trabajador.apellido_materno }}</p>
+            <p><strong>Cargo:</strong> {{ data.trabajador.cargo.nombre_cargo }}</p>
+            <p><strong>Nivel:</strong> {{ data.trabajador.nivel_jerarquico.nombre_nivel_jerarquico }}</p>
+            <p><strong>Jefatura Directa:</strong> 
+                {% if data.trabajador.id_jefe_directo %}
+                    {{ data.trabajador.id_jefe_directo.nombre }} {{ data.trabajador.id_jefe_directo.apellido_paterno }} {{ data.trabajador.id_jefe_directo.apellido_materno }}
+                {% else %}
+                    N/A
+                {% endif %}
+            </p>
+            <p><strong>Autoevaluación finalizada:</strong> {% if data.timestamp_auto %}{{ data.timestamp_auto|date:"d/m/Y H:i" }}{% else %}Pendiente{% endif %}</p>
+            <p><strong>Evaluación Jefatura finalizada:</strong> {% if data.timestamp_jefe %}{{ data.timestamp_jefe|date:"d/m/Y H:i" }}{% else %}N/A{% endif %}</p>
+        </div>
+
+        <h2>Dimensión: Organizacional</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Competencia</th>
+                    <th style="text-align: center;">AutoEv</th>
+                    <th style="text-align: center;">Ev. Jefe</th>
+                    <th style="text-align: center;">Diferencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in data.resultados_organizacionales %}
+                <tr>
+                    <td>{{ r.codigo_excel.codigo_excel }}</td>
+                    <td>{{ r.competencia.nombre_competencia }}</td>
+                    <td style="text-align: center;">{{ r.puntaje_autoev }}</td>
+                    <td style="text-align: center;">{% if r.puntaje_jefe > 0 %}{{ r.puntaje_jefe }}{% else %}N/A{% endif %}</td>
+                    <td style="text-align: center;" class="{% if r.diferencia > 0 %}positivo{% elif r.diferencia < 0 %}negativo{% else %}neutro{% endif %}">
+                        {% if r.diferencia > 0 %}+{% endif %}{{ r.diferencia|floatformat:0 }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="funcional">Dimensión: Funcional</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Competencia</th>
+                    <th style="text-align: center;">AutoEv</th>
+                    <th style="text-align: center;">Ev. Jefe</th>
+                    <th style="text-align: center;">Diferencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in data.resultados_funcionales %}
+                <tr>
+                    <td>{{ r.codigo_excel.codigo_excel }}</td>
+                    <td>{{ r.competencia.nombre_competencia }}</td>
+                    <td style="text-align: center;">{{ r.puntaje_autoev }}</td>
+                    <td style="text-align: center;">{% if r.puntaje_jefe > 0 %}{{ r.puntaje_jefe }}{% else %}N/A{% endif %}</td>
+                    <td style="text-align: center;" class="{% if r.diferencia > 0 %}positivo{% elif r.diferencia < 0 %}negativo{% else %}neutro{% endif %}">
+                        {% if r.diferencia > 0 %}+{% endif %}{{ r.diferencia|floatformat:0 }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+
+</body>
+</html>

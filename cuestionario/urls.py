@@ -24,7 +24,7 @@ urlpatterns = [
      
      path('seguimiento/reporte-global/', 
           reporte_global.generar_reporte_global_pdf, 
-          name='generar_reporte_global'),
+          name='generar_reporte_global_pdf'),
     
     # RUTAS GEMINI
     path('gemini/', gemini_admin.panel_gemini, name='panel_gemini'),

@@ -367,7 +367,7 @@ class ReporteGlobal(models.Model):
     contenido_pdf = models.BinaryField()
     timestamp = models.DateTimeField(auto_now_add=True)
     total_trabajadores = models.IntegerField(default=0)
-    periodo = models.IntegerField()
+    periodo = models.IntegerField(default=2026)
 
     class Meta:
         db_table = 'REPORTE_GLOBAL'

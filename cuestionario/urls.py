@@ -22,7 +22,7 @@ urlpatterns = [
          reporte_excel.generar_excel_detalle, 
          name='generar_excel_detalle'),
      
-     path('seguimiento/reporte-global/', 
+     path('seguimiento/reporte-global_pdf/', 
           reporte_global.generar_reporte_global_pdf, 
           name='generar_reporte_global_pdf'),
     

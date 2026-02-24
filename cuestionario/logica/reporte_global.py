@@ -10,6 +10,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, 
 from reportlab.lib.enums import TA_CENTER
 from io import BytesIO
 from datetime import datetime
+from xml.sax.saxutils import escape
 
 
 @login_required
@@ -94,10 +95,10 @@ def generar_reporte_global_pdf(request):
 
     # PORTADA
     elements.append(Spacer(1, 2 * inch))
-    elements.append(Paragraph("REPORTE GLOBAL DE EVALUACIONES DE DESEMPENO", portada_style))
+    elements.append(Paragraph("REPORTE GLOBAL DE EVALUACIONES DE DESEMPEÑO", portada_style))
     elements.append(Spacer(1, 0.5 * inch))
     elements.append(Paragraph(f"Total de Colaboradores: {trabajadores.count()}", title_style))
-    elements.append(Paragraph(f"Fecha de Generacion: {datetime.now().strftime('%d/%m/%Y %H:%M')}", title_style))
+    elements.append(Paragraph(f"Fecha de Generación: {datetime.now().strftime('%d/%m/%Y %H:%M')}", title_style))
     elements.append(Paragraph("Periodo: 2026", title_style))
     elements.append(PageBreak())
 
@@ -132,7 +133,7 @@ def generar_reporte_global_pdf(request):
         timestamp_jefe = jefe.momento_evaluacion.strftime("%d/%m/%Y %H:%M") if jefe else "N/A"
 
         elements.append(
-            Paragraph(f"Reporte de Evaluacion de Desempeno - #{idx} de {total}", title_style)
+            Paragraph(f"Reporte de Evaluación de Desempeño — #{idx} de {total}", title_style)
         )
         elements.append(Spacer(1, 0.2 * inch))
 
@@ -148,8 +149,8 @@ def generar_reporte_global_pdf(request):
             ['Cargo:',                          trabajador.cargo.nombre_cargo],
             ['Nivel:',                          trabajador.nivel_jerarquico.nombre_nivel_jerarquico],
             ['Jefatura Directa:',               jefe_directo_nombre],
-            ['Autoevaluacion finalizada:',      timestamp_auto],
-            ['Evaluacion Jefatura finalizada:', timestamp_jefe],
+            ['Autoevaluación finalizada:',      timestamp_auto],
+            ['Evaluación Jefatura finalizada:', timestamp_jefe],
         ]
 
         info_table = Table(info_data, colWidths=[2.5 * inch, 4 * inch])
@@ -167,13 +168,13 @@ def generar_reporte_global_pdf(request):
         elements.append(Spacer(1, 0.3 * inch))
 
         # Tabla Organizacional
-        elements.append(Paragraph("Dimension: Organizacional", heading_style))
+        elements.append(Paragraph("Dimensión: Organizacional", heading_style))
 
-        org_data = [['Codigo', 'Competencia / Indicador', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
+        org_data = [['Código', 'Competencia / Indicador', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
         for r in resultados_organizacionales:
             celda = [
-                Paragraph(r.competencia.nombre_competencia, comp_style),
-                Paragraph(r.codigo_excel.texto, indicator_style),
+                Paragraph(escape(r.competencia.nombre_competencia), comp_style),
+                Paragraph(escape(r.codigo_excel.texto), indicator_style),
             ]
             org_data.append([
                 r.codigo_excel.codigo_excel,
@@ -202,13 +203,13 @@ def generar_reporte_global_pdf(request):
         elements.append(Spacer(1, 0.3 * inch))
 
         # Tabla Funcional
-        elements.append(Paragraph("Dimension: Funcional", func_heading_style))
+        elements.append(Paragraph("Dimensión: Funcional", func_heading_style))
 
-        func_data = [['Codigo', 'Competencia / Indicador', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
+        func_data = [['Código', 'Competencia / Indicador', 'AutoEv', 'Ev. Jefe', 'Diferencia']]
         for r in resultados_funcionales:
             celda = [
-                Paragraph(r.competencia.nombre_competencia, comp_func_style),
-                Paragraph(r.codigo_excel.texto, indicator_style),
+                Paragraph(escape(r.competencia.nombre_competencia), comp_func_style),
+                Paragraph(escape(r.codigo_excel.texto), indicator_style),
             ]
             func_data.append([
                 r.codigo_excel.codigo_excel,

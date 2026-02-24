@@ -132,6 +132,18 @@ class PromptGeminiAdmin(admin.ModelAdmin):
     @admin.display(description='Prompt')
     def get_prompt_corto(self, obj):
         return (obj.prompt_texto[:80] + '...') if len(obj.prompt_texto) > 80 else obj.prompt_texto
+    
+@admin.register(ReporteGlobal)
+class ReporteGlobalAdmin(admin.ModelAdmin):
+    list_display = ('id_reporte_global', 'periodo', 'total_trabajadores', 'timestamp', 'get_prompt_corto')
+    list_filter = ('periodo', 'timestamp')
+    search_fields = ('id_reporte_global', 'periodo')
+    ordering = ('-timestamp',)
+    readonly_fields = ('contenido_pdf', 'timestamp')
+
+    @admin.display(description='Reporte')
+    def get_prompt_corto(self, obj):
+        return f"ID: {obj.id_reporte_global} | Período: {obj.periodo}"
 
 # Registros simples
 admin.site.register(Dimension)

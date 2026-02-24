@@ -5,7 +5,7 @@ from .models import (
     Dimension, Departamento, NivelJerarquico, Cargo, Trabajador, 
     Competencia, TextosEvaluacion, Autoevaluacion, 
     EvaluacionJefatura, ResultadoConsolidado, Escala,
-    DescripcionRespuesta, PromptGemini
+    DescripcionRespuesta, PromptGemini, ReporteGlobal
 )
 
 # --- Configuración Estética ---

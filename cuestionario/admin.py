@@ -7,6 +7,7 @@ from .models import (
     EvaluacionJefatura, ResultadoConsolidado, Escala,
     DescripcionRespuesta, PromptGemini, ReporteGlobal
 )
+from django.utils.html import format_html
 
 # --- Configuración Estética ---
 admin.site.site_header = "Administración Sistema Mohala"
@@ -123,15 +124,21 @@ class DescripcionRespuestaAdmin(admin.ModelAdmin):
 
 @admin.register(PromptGemini)
 class PromptGeminiAdmin(admin.ModelAdmin):
-    list_display = ('id_prompt', 'get_prompt_corto', 'timestamp', 'pdf_generado', 'archivo_pdf')
-    list_filter = ('pdf_generado', 'timestamp')
-    search_fields = ('prompt_texto', 'respuesta_gemini')
-    ordering = ('-timestamp',)
-    readonly_fields = ('timestamp',)
-
-    @admin.display(description='Prompt')
-    def get_prompt_corto(self, obj):
-        return (obj.prompt_texto[:80] + '...') if len(obj.prompt_texto) > 80 else obj.prompt_texto
+    list_display = ['id_prompt', 'prompt_texto_corto', 'timestamp', 'pdf_generado', 'ver_pdf_link']
+    list_filter = ['pdf_generado', 'timestamp']
+    search_fields = ['prompt_texto', 'respuesta_gemini']
+    readonly_fields = ['timestamp', 'ver_pdf_link']
+    exclude = ['archivo_pdf']
+    
+    def prompt_texto_corto(self, obj):
+        return obj.prompt_texto[:80] + '...' if len(obj.prompt_texto) > 80 else obj.prompt_texto
+    prompt_texto_corto.short_description = 'Prompt'
+    
+    def ver_pdf_link(self, obj):
+        if obj.archivo_pdf:
+            return format_html('<a href="/gemini/ver-informe/{}/" target="_blank">📄 Ver PDF</a>', obj.id_prompt)
+        return "Sin PDF"
+    ver_pdf_link.short_description = 'PDF'
     
 @admin.register(ReporteGlobal)
 class ReporteGlobalAdmin(admin.ModelAdmin):

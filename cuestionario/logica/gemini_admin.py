@@ -71,6 +71,12 @@ def generar_informe_gemini(request, prompt_id):
     except PromptGemini.DoesNotExist:
         return HttpResponse("Prompt no encontrado", status=404)
     
+    # NUEVO: Si ya existe el PDF guardado, devolverlo directamente sin llamar a Gemini
+    if prompt_obj.archivo_pdf:
+        response_http = HttpResponse(prompt_obj.archivo_pdf, content_type='application/pdf')
+        response_http['Content-Disposition'] = f'inline; filename="informe_gemini_{prompt_id}.pdf"'
+        return response_http
+    
     try:
         # Usar gemini-2.5-flash (capa gratuita)
         model = genai.GenerativeModel('models/gemini-2.5-flash')
@@ -169,6 +175,10 @@ def generar_informe_gemini(request, prompt_id):
         pdf = buffer.getvalue()
         buffer.close()
         
+        # NUEVO: Guardar el PDF en la base de datos
+        prompt_obj.archivo_pdf = pdf
+        prompt_obj.save()
+        
         response_http = HttpResponse(pdf, content_type='application/pdf')
         response_http['Content-Disposition'] = f'inline; filename="informe_gemini_{prompt_id}.pdf"'
         
@@ -223,10 +233,11 @@ def listar_modelos(request):
         """)
     except Exception as e:
         return HttpResponse(f"Error: {str(e)}")
+
     
 @login_required
 def ver_informe_gemini(request, prompt_id):
-    """Ver el informe generado por Gemini en HTML"""
+    """Ver el PDF generado guardado en la BD"""
     if not request.user.is_superuser:
         return redirect('index')
     
@@ -235,10 +246,17 @@ def ver_informe_gemini(request, prompt_id):
     except PromptGemini.DoesNotExist:
         return HttpResponse("Prompt no encontrado", status=404)
     
-    if not prompt_obj.respuesta_gemini:
-        return HttpResponse("Este prompt aún no tiene informe generado", status=404)
+    # MODIFICADO: Si existe el PDF guardado, mostrarlo directamente
+    if prompt_obj.archivo_pdf:
+        response = HttpResponse(prompt_obj.archivo_pdf, content_type='application/pdf')
+        response['Content-Disposition'] = f'inline; filename="informe_gemini_{prompt_id}.pdf"'
+        return response
     
-    # Convertir markdown básico a HTML
+    # Si no hay PDF guardado, mostrar mensaje
+    if not prompt_obj.respuesta_gemini:
+        return HttpResponse("Este prompt aún no tiene informe generado. Haz click en 'Generar PDF' primero.", status=404)
+    
+    # Si solo tiene respuesta de texto pero no PDF, mostrar HTML (fallback)
     contenido = prompt_obj.respuesta_gemini
     contenido = contenido.replace('**', '<strong>').replace('**', '</strong>')
     contenido = contenido.replace('*', '<em>').replace('*', '</em>')
@@ -324,6 +342,7 @@ def ver_informe_gemini(request, prompt_id):
                 <div class="content">
                     <h2>Informe:</h2>
                     {contenido}
+                    <p style="color: #ff5151; margin-top: 20px;"><strong>Nota:</strong> Este prompt solo tiene texto guardado. Genera el PDF para ver el formato completo.</p>
                 </div>
                 
                 <div class="actions">

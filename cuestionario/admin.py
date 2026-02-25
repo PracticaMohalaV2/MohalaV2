@@ -124,15 +124,11 @@ class DescripcionRespuestaAdmin(admin.ModelAdmin):
 
 @admin.register(PromptGemini)
 class PromptGeminiAdmin(admin.ModelAdmin):
-    list_display = ['id_prompt', 'prompt_texto_corto', 'timestamp', 'pdf_generado', 'ver_pdf_link']
+    list_display = ['id_prompt', 'prompt_texto', 'timestamp', 'pdf_generado', 'ver_pdf_link']
     list_filter = ['pdf_generado', 'timestamp']
     search_fields = ['prompt_texto', 'respuesta_gemini']
     readonly_fields = ['timestamp', 'ver_pdf_link']
     exclude = ['archivo_pdf']
-    
-    def prompt_texto_corto(self, obj):
-        return obj.prompt_texto[:80] + '...' if len(obj.prompt_texto) > 80 else obj.prompt_texto
-    prompt_texto_corto.short_description = 'Prompt'
     
     def ver_pdf_link(self, obj):
         if obj.archivo_pdf:

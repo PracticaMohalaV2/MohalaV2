@@ -93,10 +93,18 @@ def generar_reporte_global_pdf(request):
         leading=9,
     )
 
+    # Crear el reporte en BD primero para obtener el ID
+    reporte_global_temp = ReporteGlobal.objects.create(
+        contenido_pdf=b'',  # Temporal vacío
+        total_trabajadores=trabajadores.count(),
+        periodo=2026
+    )
+
     # PORTADA
     elements.append(Spacer(1, 2 * inch))
     elements.append(Paragraph("REPORTE GLOBAL DE EVALUACIONES DE DESEMPEÑO", portada_style))
     elements.append(Spacer(1, 0.5 * inch))
+    elements.append(Paragraph(f"ID Reporte: #{reporte_global_temp.id_reporte_global}", title_style))
     elements.append(Paragraph(f"Total de Colaboradores: {trabajadores.count()}", title_style))
     elements.append(Paragraph(f"Fecha de Generación: {datetime.now().strftime('%d/%m/%Y %H:%M')}", title_style))
     elements.append(Paragraph("Periodo: 2026", title_style))
@@ -243,14 +251,12 @@ def generar_reporte_global_pdf(request):
     pdf_bytes = buffer.getvalue()
     buffer.close()
 
-    reporte_global = ReporteGlobal.objects.create(
-        contenido_pdf=pdf_bytes,
-        total_trabajadores=total,
-        periodo=2026
-    )
+    # Actualizar el reporte con el PDF generado
+    reporte_global_temp.contenido_pdf = pdf_bytes
+    reporte_global_temp.save()
 
     response = HttpResponse(pdf_bytes, content_type='application/pdf')
     response['Content-Disposition'] = (
-        f'inline; filename="reporte_global_{reporte_global.id_reporte_global}.pdf"'
+        f'inline; filename="reporte_global_{reporte_global_temp.id_reporte_global}.pdf"'
     )
     return response

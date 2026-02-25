@@ -138,15 +138,22 @@ class PromptGeminiAdmin(admin.ModelAdmin):
     
 @admin.register(ReporteGlobal)
 class ReporteGlobalAdmin(admin.ModelAdmin):
-    list_display = ('id_reporte_global', 'periodo', 'total_trabajadores', 'timestamp', 'get_prompt_corto')
+    list_display = ('id_reporte_global', 'periodo', 'total_trabajadores', 'timestamp', 'get_prompt_corto', 'ver_pdf_link')
     list_filter = ('periodo', 'timestamp')
     search_fields = ('id_reporte_global', 'periodo')
     ordering = ('-timestamp',)
-    readonly_fields = ('contenido_pdf', 'timestamp')
+    readonly_fields = ('timestamp', 'ver_pdf_link')
+    exclude = ['contenido_pdf']
 
     @admin.display(description='Reporte')
     def get_prompt_corto(self, obj):
         return f"ID: {obj.id_reporte_global} | Período: {obj.periodo}"
+    
+    def ver_pdf_link(self, obj):
+        if obj.contenido_pdf:
+            return format_html('<a href="/seguimiento/ver-reporte-global/{}/" target="_blank">📄 Ver PDF Global</a>', obj.id_reporte_global)
+        return "Sin PDF"
+    ver_pdf_link.short_description = 'PDF Global'
 
 # Registros simples
 admin.site.register(Dimension)

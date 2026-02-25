@@ -260,3 +260,22 @@ def generar_reporte_global_pdf(request):
         f'inline; filename="reporte_global_{reporte_global_temp.id_reporte_global}.pdf"'
     )
     return response
+
+
+@login_required
+def ver_reporte_global_pdf(request, reporte_id):
+    """Ver el PDF del reporte global guardado en la BD"""
+    if not request.user.is_superuser:
+        return redirect('index')
+    
+    try:
+        reporte = ReporteGlobal.objects.get(id_reporte_global=reporte_id)
+    except ReporteGlobal.DoesNotExist:
+        return HttpResponse("Reporte no encontrado", status=404)
+    
+    if not reporte.contenido_pdf:
+        return HttpResponse("Este reporte no tiene PDF generado", status=404)
+    
+    response = HttpResponse(reporte.contenido_pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'inline; filename="reporte_global_{reporte_id}.pdf"'
+    return response

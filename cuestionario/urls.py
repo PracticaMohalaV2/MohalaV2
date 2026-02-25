@@ -22,9 +22,13 @@ urlpatterns = [
          reporte_excel.generar_excel_detalle, 
          name='generar_excel_detalle'),
      
-     path('seguimiento/reporte-global/', 
-          reporte_global.generar_reporte_global_pdf, 
-          name='generar_reporte_global_pdf'),
+    path('seguimiento/reporte-global/', 
+         reporte_global.generar_reporte_global_pdf, 
+         name='generar_reporte_global_pdf'),
+    
+    path('seguimiento/ver-reporte-global/<int:reporte_id>/', 
+         reporte_global.ver_reporte_global_pdf, 
+         name='ver_reporte_global_pdf'),
     
     # RUTAS GEMINI
     path('gemini/', gemini_admin.panel_gemini, name='panel_gemini'),

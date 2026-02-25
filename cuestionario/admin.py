@@ -123,7 +123,7 @@ class DescripcionRespuestaAdmin(admin.ModelAdmin):
 
 @admin.register(PromptGemini)
 class PromptGeminiAdmin(admin.ModelAdmin):
-    list_display = ('id_prompt', 'get_prompt_corto', 'timestamp', 'pdf_generado')
+    list_display = ('id_prompt', 'get_prompt_corto', 'timestamp', 'pdf_generado', 'archivo_pdf')
     list_filter = ('pdf_generado', 'timestamp')
     search_fields = ('prompt_texto', 'respuesta_gemini')
     ordering = ('-timestamp',)

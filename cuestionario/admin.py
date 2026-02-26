@@ -179,8 +179,14 @@ class BibliotecaForm(forms.ModelForm):
 @admin.register(Biblioteca)
 class BibliotecaAdmin(admin.ModelAdmin):
     form = BibliotecaForm
-    list_display = ['id_biblioteca', 'nombre', 'estado_carga', 'fecha_carga']
-    readonly_fields = ['estado_carga', 'fecha_carga']
+    list_display = ['id_biblioteca', 'nombre', 'estado_carga', 'fecha_carga', 'ver_pdf_link']
+    readonly_fields = ['estado_carga', 'fecha_carga', 'ver_pdf_link']
+
+    def ver_pdf_link(self, obj):
+        if obj.archivo:
+            return format_html('<a href="/biblioteca/ver-archivo/{}/" target="_blank">📄 Ver PDF</a>', obj.id_biblioteca)
+        return "Sin archivo"
+    ver_pdf_link.short_description = 'Archivo'
 
 # Registros simples
 admin.site.register(Dimension)

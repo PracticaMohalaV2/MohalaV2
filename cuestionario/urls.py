@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from . import logica as views
-from .logica import validador_login, seguimiento, detalle_seguimiento, reporte_pdf, reporte_excel, gemini_admin, reporte_global
+from .logica import validador_login, seguimiento, detalle_seguimiento, reporte_pdf, reporte_excel, gemini_admin, reporte_global, manejo_archivos
 
 urlpatterns = [
     path('login/', validador_login.login_view, name='login'),
@@ -29,6 +29,10 @@ urlpatterns = [
     path('seguimiento/ver-reporte-global/<int:reporte_id>/', 
          reporte_global.ver_reporte_global_pdf, 
          name='ver_reporte_global_pdf'),
+
+     path('biblioteca/ver-archivo/<int:biblioteca_id>/', 
+          manejo_archivos.ver_archivo_biblioteca, 
+          name='ver_archivo_biblioteca'),
     
     # RUTAS GEMINI
     path('gemini/', gemini_admin.panel_gemini, name='panel_gemini'),

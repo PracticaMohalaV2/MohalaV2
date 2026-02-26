@@ -13,7 +13,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.lib.enums import TA_JUSTIFY
 from io import BytesIO
 
-# Cargar variables de entorno
+# Cargar variables de entornoo
 load_dotenv()
 
 # Configurar Gemini

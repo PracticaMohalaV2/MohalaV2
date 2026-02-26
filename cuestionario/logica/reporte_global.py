@@ -257,7 +257,7 @@ def generar_reporte_global_pdf(request):
 
     response = HttpResponse(pdf_bytes, content_type='application/pdf')
     response['Content-Disposition'] = (
-        f'inline; filename="reporte_global_{reporte_global_temp.id_reporte_global}.pdf"'
+        f'inline; filename="reporte_respuestas_global_{reporte_global_temp.id_reporte_global}.pdf"'
     )
     return response
 

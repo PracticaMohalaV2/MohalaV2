@@ -5,7 +5,8 @@ from .models import (
     Dimension, Departamento, NivelJerarquico, Cargo, Trabajador, 
     Competencia, TextosEvaluacion, Autoevaluacion, 
     EvaluacionJefatura, ResultadoConsolidado, Escala,
-    DescripcionRespuesta, PromptGemini, ReporteGlobal
+    DescripcionRespuesta, PromptGemini, ReporteGlobal,
+    Biblioteca
 )
 from django.utils.html import format_html
 
@@ -154,6 +155,31 @@ class ReporteGlobalAdmin(admin.ModelAdmin):
             return format_html('<a href="/seguimiento/ver-reporte-global/{}/" target="_blank">📄 Ver PDF Global</a>', obj.id_reporte_global)
         return "Sin PDF"
     ver_pdf_link.short_description = 'PDF Global'
+
+
+class BibliotecaForm(forms.ModelForm):
+    archivo = forms.FileField(label='Archivo PDF')
+
+    class Meta:
+        model = Biblioteca
+        fields = ['nombre', 'archivo']
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        try:
+            instance.archivo = self.cleaned_data['archivo'].read()
+            instance.estado_carga = True
+        except Exception:
+            instance.estado_carga = False
+        if commit:
+            instance.save()
+        return instance
+
+@admin.register(Biblioteca)
+class BibliotecaAdmin(admin.ModelAdmin):
+    form = BibliotecaForm
+    list_display = ['id_biblioteca', 'nombre', 'estado_carga', 'fecha_carga']
+    readonly_fields = ['estado_carga', 'fecha_carga']
 
 # Registros simples
 admin.site.register(Dimension)

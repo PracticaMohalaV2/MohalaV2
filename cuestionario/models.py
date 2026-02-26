@@ -401,3 +401,20 @@ class PromptGemini(models.Model):
 
     def __str__(self):
         return f"Prompt {self.id_prompt} - {self.timestamp.strftime('%d/%m/%Y')}"
+    
+# ==========================================================
+# Biblioteca
+# ==========================================================
+class Biblioteca(models.Model):
+    id_biblioteca = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=100)
+    archivo = models.BinaryField()
+    estado_carga = models.BooleanField(default=False)
+    fecha_carga = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        managed = False
+        db_table = 'BIBLIOTECA'
+
+    def __str__(self):
+        return self.nombre

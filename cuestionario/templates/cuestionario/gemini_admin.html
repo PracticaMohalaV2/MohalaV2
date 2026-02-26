@@ -5,7 +5,7 @@
 {% block content %}
 <section>
     <header>
-        <a href="{% url 'seguimiento_admin' %}" class="button small">← Volver a Seguimiento</a>
+        <a href="{% url 'seguimiento_admin' %}" class="button small primary">← Volver a Seguimiento</a>
         
         <h2 style="margin-top: 1em;">Panel de Generación de Informes con IA</h2>
         <p>Utiliza Gemini AI para generar informes personalizados</p>
@@ -74,7 +74,7 @@
                         <td style="text-align: center;">
                             {% if prompt.respuesta_gemini %}
                                 <a href="{% url 'ver_informe_gemini' prompt.id_prompt %}" 
-                                   class="button small">
+                                   class="button small primary">
                                     📄 Ver Informe
                                 </a>
                             {% else %}

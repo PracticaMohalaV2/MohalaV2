@@ -26,7 +26,7 @@
                 <h3>Gestión de Usuarios</h3>
                 <p>Accede al panel nativo de Django para gestionar cuentas y permisos.</p>
                 <ul class="actions">
-                    <li><a href="/admin/" class="button">Ir al Admin de Django</a></li>
+                    <li><a href="/admin/" class="button primary">Ir al Admin de Django</a></li>
                 </ul>
             </section>
         </div>
@@ -47,7 +47,7 @@
             
             {% if ya_hizo_autoevaluacion %}
                 <p style="color: #51ff85;">✅ <strong>Proceso Completado:</strong> Has finalizado todas tus dimensiones.</p>
-                <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button">Ver estado</a>
+                <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button primary">Ver estado</a>
             {% else %}
                 <p>Presiona el botón para seleccionar la dimensión que deseas evaluar (Organizacional o Funcional).</p>
                 <ul class="actions">
@@ -102,7 +102,7 @@
                                     <td style="text-align: center;">
                                         {% if subordinado.autoevaluacion_terminada %}
                                             {% if subordinado.ya_evaluado %}
-                                                <a href="{% url 'evaluacion_jefe_inicio' trabajador.id_trabajador subordinado.id_trabajador %}" class="button small">
+                                                <a href="{% url 'evaluacion_jefe_inicio' trabajador.id_trabajador subordinado.id_trabajador %}" class="button primary small">
                                                     ✅ Finalizado (Ver)
                                                 </a>
                                             {% else %}
@@ -111,7 +111,7 @@
                                                 </a>
                                             {% endif %}
                                         {% else %}
-                                            <button class="button small" disabled 
+                                            <button class="button primary small" disabled 
                                                     style="opacity: 0.4; cursor: not-allowed;" 
                                                     title="El colaborador debe finalizar su autoevaluación para que puedas evaluarlo.">
                                                 Bloqueado

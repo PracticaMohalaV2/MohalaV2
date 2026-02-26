@@ -6,9 +6,9 @@
 <section>
     <header>
         {% if tipo_evaluacion == 'auto' %}
-            <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button small">← Volver a Selección</a>
+            <a href="{% url 'autoevaluacion_inicio' trabajador.id_trabajador %}" class="button primary small">← Volver a Selección</a>
         {% else %}
-            <a href="{% url 'evaluacion_jefe_inicio' visor_id trabajador.id_trabajador %}" class="button small">← Volver a Selección</a>
+            <a href="{% url 'evaluacion_jefe_inicio' visor_id trabajador.id_trabajador %}" class="button primary small">← Volver a Selección</a>
         {% endif %}
         
         <h2 style="margin-top: 1em;">Reporte de Evaluación Finalizada</h2>

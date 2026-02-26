@@ -273,7 +273,7 @@ def ver_informe_gemini(request, prompt_id):
     if not prompt_obj.respuesta_gemini:
         return HttpResponse("Este prompt aún no tiene informe generado. Haz click en 'Generar PDF' primero.", status=404)
     
-    # Si solo tiene respuesta de texto pero no PDF, mostrar HTML (fallback)
+    # Si solo tiene respuesta de texto pero no PDF, mostrar HTML
     contenido = prompt_obj.respuesta_gemini
     contenido = contenido.replace('**', '<strong>').replace('**', '</strong>')
     contenido = contenido.replace('*', '<em>').replace('*', '</em>')

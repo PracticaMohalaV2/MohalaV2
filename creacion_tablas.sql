@@ -240,7 +240,7 @@ CREATE TABLE REPORTE_GLOBAL (
 
 -- =========================
 -- Gemini
--- =========================
+-- ==========================
 CREATE TABLE PROMPT_GEMINI (
     ID_PROMPT INT AUTO_INCREMENT PRIMARY KEY,
     PROMPT_TEXTO TEXT NOT NULL,

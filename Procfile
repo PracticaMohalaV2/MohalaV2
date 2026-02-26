@@ -1,1 +1,1 @@
-web: gunicorn Sistema_Mohala.wsgi --bind 0.0.0.0:$PORT
+web: gunicorn --timeout 300 --graceful-timeout 300 Sistema_Mohala.wsgi --bind 0.0.0.0:$PORT

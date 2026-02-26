@@ -277,5 +277,5 @@ def ver_reporte_global_pdf(request, reporte_id):
         return HttpResponse("Este reporte no tiene PDF generado", status=404)
     
     response = HttpResponse(reporte.contenido_pdf, content_type='application/pdf')
-    response['Content-Disposition'] = f'inline; filename="reporte_global_{reporte_id}.pdf"'
+    response['Content-Disposition'] = f'inline; filename="reporte_respuestas_global_{reporte_id}.pdf"'
     return response

@@ -75,18 +75,23 @@
     </div>
 
     <ul class="actions">
-        <li><a href="{% url 'index' %}" class="button primary">Volver al Panel</a>
-        </li>
-        {% if user.is_superuser %}
-            <a href="{% url 'generar_reporte_global_pdf' %}" 
-               class="button primary">
-               📊 Generar Reporte Respuestas
-            </a>
-        </li>
-        <li><a href="{% url 'panel_gemini' %}" class="button primary">🤖 Panel Informe con IA</a></li>
-        
-        <li>
-        {% endif %}
+    <li>
+        <a href="{% url 'index' %}" class="button">Volver al Panel</a>
+    </li>
+    
+    {% if user.is_superuser %}
+    <li>
+        <a href="{% url 'generar_reporte_global_pdf' %}" class="button primary">
+            📊 Generar Reporte Respuestas
+        </a>
+    </li>
+    
+    <li>
+        <a href="{% url 'panel_gemini' %}" class="button primary">
+            🤖 Panel Informe con IA
+        </a>
+    </li>
+    {% endif %}
     </ul>
 </section>
 {% endblock %}

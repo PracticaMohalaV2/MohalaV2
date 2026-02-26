@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from cuestionario.models import PromptGemini
+from cuestionario.models import PromptGemini, Biblioteca, ReporteGlobal
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
@@ -50,7 +50,6 @@ def editar_prompt(request):
         prompt_texto = request.POST.get('prompt_texto', '')
         
         if prompt_texto.strip():
-            # Crear nuevo prompt
             PromptGemini.objects.create(
                 prompt_texto=prompt_texto
             )
@@ -71,7 +70,7 @@ def generar_informe_gemini(request, prompt_id):
     except PromptGemini.DoesNotExist:
         return HttpResponse("Prompt no encontrado", status=404)
     
-    # NUEVO: Si ya existe el PDF guardado, devolverlo directamente sin llamar a Gemini
+    # Si ya existe el PDF guardado, devolverlo directamente sin llamar a Gemini
     if prompt_obj.archivo_pdf:
         response_http = HttpResponse(prompt_obj.archivo_pdf, content_type='application/pdf')
         response_http['Content-Disposition'] = f'inline; filename="informe_gemini_{prompt_id}.pdf"'
@@ -80,9 +79,27 @@ def generar_informe_gemini(request, prompt_id):
     try:
         # Usar gemini-2.5-flash (capa gratuita)
         model = genai.GenerativeModel('models/gemini-2.5-flash')
-        
-        # Generar respuesta
-        response = model.generate_content(prompt_obj.prompt_texto)
+
+        # --- INICIO: Carga de archivos de contexto tras bambalinas ---
+
+        # Cargar documentos de Biblioteca con estado_carga=True
+        docs_biblioteca = Biblioteca.objects.filter(estado_carga=True)
+
+        # Cargar último reporte global generado
+        ultimo_reporte = ReporteGlobal.objects.order_by('-timestamp').first()
+
+        # Construir lista de partes: primero los PDFs, luego el prompt
+        partes = []
+        for doc in docs_biblioteca:
+            partes.append({'mime_type': 'application/pdf', 'data': bytes(doc.archivo)})
+        if ultimo_reporte and ultimo_reporte.contenido_pdf:
+            partes.append({'mime_type': 'application/pdf', 'data': bytes(ultimo_reporte.contenido_pdf)})
+        partes.append(prompt_obj.prompt_texto)
+
+        # --- FIN: Carga de archivos de contexto ---
+
+        # Generar respuesta con contexto
+        response = model.generate_content(partes)
         respuesta_texto = response.text
         
         # Guardar respuesta en la BD
@@ -136,7 +153,7 @@ def generar_informe_gemini(request, prompt_id):
         # Prompt usado
         elements.append(Paragraph("Prompt Utilizado", subtitle_style))
         
-        # MODIFICADO: Escapar caracteres especiales en el prompt
+        # Escapar caracteres especiales en el prompt
         prompt_escapado = prompt_obj.prompt_texto.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
         elements.append(Paragraph(prompt_escapado, body_style))
         elements.append(Spacer(1, 0.3*inch))
@@ -145,7 +162,7 @@ def generar_informe_gemini(request, prompt_id):
         elements.append(Paragraph("Informe Generado", title_style))
         elements.append(Spacer(1, 0.1*inch))
         
-        # MODIFICADO: Procesar la respuesta con manejo de caracteres especiales
+        # Procesar la respuesta con manejo de caracteres especiales
         lineas = respuesta_texto.split('\n')
         for linea in lineas:
             if linea.strip():

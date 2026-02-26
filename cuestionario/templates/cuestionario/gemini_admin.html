@@ -65,16 +65,22 @@
                             {% endif %}
                         </td>
                         <td style="text-align: center;">
-                            <a href="{% url 'generar_informe_gemini' prompt.id_prompt %}" 
-                               class="button small primary" 
-                               target="_blank">
-                                🤖 Generar Informe
-                            </a>
+                            {% if prompt.pdf_generado %}
+                                <button class="button small" disabled style="opacity: 0.4; cursor: not-allowed;">
+                                    ✓ Ya Generado
+                                </button>
+                            {% else %}
+                                <a href="{% url 'generar_informe_gemini' prompt.id_prompt %}" 
+                                   class="button small primary" 
+                                   target="_blank">
+                                    🤖 Generar Informe
+                                </a>
+                            {% endif %}
                         </td>
                         <td style="text-align: center;">
-                            {% if prompt.respuesta_gemini %}
+                            {% if prompt.pdf_generado %}
                                 <a href="{% url 'ver_informe_gemini' prompt.id_prompt %}" 
-                                   class="button small primary">
+                                   class="button small primary" target="_blank">
                                     📄 Ver Informe
                                 </a>
                             {% else %}

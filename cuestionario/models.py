@@ -408,7 +408,7 @@ class PromptGemini(models.Model):
 class Biblioteca(models.Model):
     id_biblioteca = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    archivo = models.BinaryField()
+    archivo = models.BinaryField(editable=True)
     estado_carga = models.BooleanField(default=False)
     fecha_carga = models.DateTimeField(auto_now_add=True)
 

@@ -80,8 +80,6 @@ def generar_informe_gemini(request, prompt_id):
         # Usar gemini-2.5-flash (capa gratuita)
         model = genai.GenerativeModel('models/gemini-2.5-flash')
 
-        # --- INICIO: Carga de archivos de contexto tras bambalinas ---
-
         # Cargar documentos de Biblioteca con estado_carga=True
         docs_biblioteca = Biblioteca.objects.filter(estado_carga=True)
 
@@ -95,8 +93,6 @@ def generar_informe_gemini(request, prompt_id):
         if ultimo_reporte and ultimo_reporte.contenido_pdf:
             partes.append({'mime_type': 'application/pdf', 'data': bytes(ultimo_reporte.contenido_pdf)})
         partes.append(prompt_obj.prompt_texto)
-
-        # --- FIN: Carga de archivos de contexto ---
 
         # Generar respuesta con contexto
         response = model.generate_content(partes)
